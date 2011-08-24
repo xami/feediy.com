@@ -65,6 +65,29 @@ $cs->registerCoreScript('jquery');
     
 <script type="text/javascript">
 //<![CDATA[
+Array.prototype.distinct = function(){
+   var $ = this;
+   var o1 = {};
+   var o2 = {};
+   var o3 = [];
+   var o ;
+   for(var i = 0;o = $[i];i++){
+      if(o in o2){
+         if(!(o in o2)) o2[o]=o;
+         delete $[i];
+      }else{
+         o1[o]=o;
+      }
+   }
+   $.length = 0;
+   for(o in o1){
+      $.push(o);
+   }
+   for(o in o2){
+      o3.push(o);
+   }
+   return o3;
+};
 
 (function($) {
     $.fn.siteMap = function(settings) {
@@ -77,7 +100,7 @@ $cs->registerCoreScript('jquery');
         },settings || {});
         
         this.click(function (){
-            _trace(the_url, 'alert');
+//            _trace(the_url, 'alert');
             _run();
         });
 
@@ -86,7 +109,8 @@ $cs->registerCoreScript('jquery');
                 url_depth++;
                 the_url = $("#initurl").val();
             }else{
-                if(url_data[url_depth]!=''){
+                if(url_data[url_depth]!='' && url_data[url_depth]!=undefined){
+                    _trace(url_data[url_depth], 'alert');
                     the_url = url_data[url_depth].shift();
                 }else{
                     url_depth++;
@@ -100,7 +124,6 @@ $cs->registerCoreScript('jquery');
         }
 
         var _run = function(){
-            _trace(url_index, 'alert');
             get_the_url();
             if(the_url!=''){
                 _get_url_list();
@@ -124,7 +147,7 @@ $cs->registerCoreScript('jquery');
                 _run();
                 return false;
             }
-            if(settings.url_depth<2){
+            if(url_depth<2){
                 var url_depth_top=url_depth+1;
                 if(url_data[url_depth_top]==undefined){
                     url_data[url_depth_top]=[];
@@ -133,8 +156,8 @@ $cs->registerCoreScript('jquery');
                     var one_url=list.data[i];
                     url_data[url_depth_top].push(one_url);
                 }
-//                _trace(settings.url_index, 'alert');
             }
+            _trace(url_data, 'alert');
             _run();
         };
 

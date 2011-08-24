@@ -386,3 +386,21 @@ Stack trace:
 #3 D:\github\framework\base\CApplication.php(158): CWebApplication->processRequest()
 #4 D:\github\feediy.com\index.php(13): CApplication->run()
 #5 {main} REQUEST_URI=/tool/images/but.gif
+2011/08/24 12:42:04 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in C:\Users\xami\Desktop\web\git\framework\web\CWebApplication.php:281
+Stack trace:
+#0 C:\Users\xami\Desktop\web\git\framework\web\CWebApplication.php(136): CWebApplication->runController('favicon.ico')
+#1 C:\Users\xami\Desktop\web\git\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 C:\Users\xami\Desktop\web\git\feediy.com\index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/favicon.ico
+2011/08/24 12:42:04 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in C:\Users\xami\Desktop\web\git\framework\web\CWebApplication.php:281
+Stack trace:
+#0 C:\Users\xami\Desktop\web\git\framework\web\CWebApplication.php(136): CWebApplication->runController('favicon.ico')
+#1 C:\Users\xami\Desktop\web\git\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 C:\Users\xami\Desktop\web\git\feediy.com\index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/favicon.ico
+2011/08/24 12:42:05 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in C:\Users\xami\Desktop\web\git\framework\web\CWebApplication.php:281
+Stack trace:
+#0 C:\Users\xami\Desktop\web\git\framework\web\CWebApplication.php(136): CWebApplication->runController('favicon.ico')
+#1 C:\Users\xami\Desktop\web\git\framework\base\CApplication.php(158): CWebApplication->processRequest()
+#2 C:\Users\xami\Desktop\web\git\feediy.com\index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/favicon.ico
