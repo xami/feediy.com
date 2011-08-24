@@ -131,7 +131,6 @@ Array.prototype.distinct = function(){
         }
 
         var _get_url_list = function (){
-//            _trace(settings.the_index, 'alert');
             jQuery.ajax({
                 'url':settings.api_url,
                 'success':_save_url_list,
@@ -139,7 +138,6 @@ Array.prototype.distinct = function(){
                 'data':{'src':the_url},
                 'cache':false
             });
-
         }
 
         var _save_url_list = function (list){
