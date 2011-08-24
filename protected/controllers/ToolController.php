@@ -94,6 +94,11 @@ class ToolController extends Controller
 	{
 		$this->render('index');
 	}
+
+    public function actionSitemap()
+	{
+		$this->render('sitemap');
+	}
 	
 	public function actionIn2Out()
 	{
@@ -184,7 +189,10 @@ class ToolController extends Controller
                     continue;
                 }
                 $link=trim($link);
+                
                 unset($link_info);
+                $link_info=parse_url($link);
+                
                 if(strpos($link, 'http://')>0){
                     $links_full[]=$src_info['scheme'].'://'.$src_info['host'].'/'.$link;
                     continue;
@@ -193,7 +201,7 @@ class ToolController extends Controller
                     continue;
                 }
 
-                $link_info=parse_url($link);
+
 
                 if(!isset($link_info['path'])){
                     $link_info['path']='';
@@ -204,9 +212,11 @@ class ToolController extends Controller
                 if(!empty($link_info['query'])){
                     $link_info['query']='?'.$link_info['query'];
                 }
-//                pr($link_info);
+//                pd($src_info);
                 if(strpos($link_info['path'], '/')!==0){
-                    if(strpos($src_info['path'], '/')!==0){
+                    if(!isset($src_info['path'])){
+                         $src_info['path']='/';
+                    }else if(strpos($src_info['path'], '/')!==0){
                         $src_info['path']='/'.$src_info['path'];
                     }
                     if(substr($src_info['path'], -1, 1)!=='/'){
