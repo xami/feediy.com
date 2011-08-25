@@ -58,35 +58,28 @@ $cs->registerCoreScript('jquery');
 <div class="four">程序会自动分析目标网站的内容并生成网站地图,不限页数,当前版本只支持两层逻辑深度</div>
 <div id="msg">整理出的网站地图内容系FeeDiy根据您的指令自动整理的结果,不代表FeeDiy赞成被整理网站的内容或立场</div>
 
-<input class="ibox" type="text" value="http://" size="63" name="initurl" id="initurl">
+<input class="ibox" type="text" value="http://www.mtianya.com" size="63" name="initurl" id="initurl">
 <input class="but" type="button" value="分析" id="st1">
 <br />
-
-    
+    <table>
+<tr>
+<td id="deep_0"></td>
+<td id="deep_1"></td>
+<td id="deep_2"></td>
+</tr>
+    </table>
 <script type="text/javascript">
 //<![CDATA[
-Array.prototype.distinct = function(){
-   var $ = this;
-   var o1 = {};
-   var o2 = {};
-   var o3 = [];
-   var o ;
-   for(var i = 0;o = $[i];i++){
-      if(o in o2){
-         if(!(o in o2)) o2[o]=o;
-         delete $[i];
-      }else{
-         o1[o]=o;
-      }
-   }
-   $.length = 0;
-   for(o in o1){
-      $.push(o);
-   }
-   for(o in o2){
-      o3.push(o);
-   }
-   return o3;
+Array.prototype.unquie=function(){
+        //需要考虑数组内容中包含boolean,string类型数据。
+     var newArray=[] , provisionalTable = {};
+    for (var i = 0, item; (item= this[i]) != null; i++) {
+        if (!provisionalTable[item] && item != "") {
+             newArray.push(item);
+             provisionalTable[item] = true;
+         }
+     }
+    return newArray;
 };
 
 (function($) {
@@ -100,6 +93,9 @@ Array.prototype.distinct = function(){
         },settings || {});
         
         this.click(function (){
+//            var a = [1,323,'ada','3',3,'4','bb','','bb'];
+//            document.write(a, ' <br/> ');
+//            document.write(a.unquie(), ' <br/> ');
 //            _trace(the_url, 'alert');
             _run();
         });
@@ -114,13 +110,15 @@ Array.prototype.distinct = function(){
                     the_url = url_data[url_depth].shift();
                 }else{
                     url_depth++;
-                    if(url_data[url_depth]==undefined){
-                        return '';
-                    }else{
+                    if(url_data[url_depth]!='' && url_data[url_depth]!=undefined){
                         the_url = url_data[url_depth].shift();
+                    }else{
+                        return '';
                     }
                 }
             }
+
+            $('#deep_'+url_depth).append('<p>', the_url.link(the_url), '</p>');
         }
 
         var _run = function(){
@@ -145,7 +143,7 @@ Array.prototype.distinct = function(){
                 _run();
                 return false;
             }
-            if(url_depth<2){
+            if(url_depth<3){
                 var url_depth_top=url_depth+1;
                 if(url_data[url_depth_top]==undefined){
                     url_data[url_depth_top]=[];
@@ -155,7 +153,7 @@ Array.prototype.distinct = function(){
                     url_data[url_depth_top].push(one_url);
                 }
             }
-//            _trace(url_data, 'alert');
+//            document.write(url_data);
             _run();
         };
 
