@@ -110,7 +110,7 @@ Array.prototype.distinct = function(){
                 the_url = $("#initurl").val();
             }else{
                 if(url_data[url_depth]!='' && url_data[url_depth]!=undefined){
-                    _trace(url_data[url_depth], 'alert');
+//                    _trace(url_data[url_depth], 'alert');
                     the_url = url_data[url_depth].shift();
                 }else{
                     url_depth++;
@@ -155,7 +155,7 @@ Array.prototype.distinct = function(){
                     url_data[url_depth_top].push(one_url);
                 }
             }
-            _trace(url_data, 'alert');
+//            _trace(url_data, 'alert');
             _run();
         };
 

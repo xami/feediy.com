@@ -149,8 +149,9 @@ class ToolController extends Controller
             echo json_encode(array('status'=>500,'data'=>''));
             die;
         }
-        
+
         $cut_content_type=explode(';', $page['Info']['content_type']);
+        $page['Info']['html_code']='utf-8';
         if(isset($cut_content_type[1])&&!empty($cut_content_type[1])){
             $page['Info']['content_type']=strtolower(trim($cut_content_type[0]));
             $html_code_str=strtolower(trim($cut_content_type[1]));
@@ -173,7 +174,6 @@ class ToolController extends Controller
             echo json_encode(array('status'=>500,'data'=>''));
             die;
         }
-
         $html=iconv($page['Info']['html_code'], 'utf-8//IGNORE', $html);
         preg_match_all("'<\s*a\s.*?href\s*=\s*([\"\']?)(?(1)(.*?)\\1|([^\s\>]+))[^>]*>?(.*?)</a>'isx",$html,$links);
 
