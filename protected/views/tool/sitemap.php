@@ -70,9 +70,9 @@ $cs->registerCoreScript('jquery');
     </table>
 <script type="text/javascript">
 //<![CDATA[
-Array.prototype.unquie=function(){
-        //需要考虑数组内容中包含boolean,string类型数据。
-     var newArray=[] , provisionalTable = {};
+Array.prototype.distinct1 = function(){
+    //需要考虑数组内容中包含boolean,string类型数据。
+    var newArray=[] , provisionalTable = {};
     for (var i = 0, item; (item= this[i]) != null; i++) {
         if (!provisionalTable[item] && item != "") {
              newArray.push(item);
@@ -80,6 +80,20 @@ Array.prototype.unquie=function(){
          }
      }
     return newArray;
+};
+
+Array.prototype.distinct2 = function(){
+var b=[];
+var obj={};
+for(var i=0;i<this.length;i++){
+    obj[this[i]]=this[i];
+}
+for(var a in obj){
+    if(obj[a]!=false){
+        b.push(obj[a]);
+    }
+}
+return b;
 };
 
 (function($) {
