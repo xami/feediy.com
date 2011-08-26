@@ -176,7 +176,7 @@ class ToolController extends Controller
         }
         $html=iconv($page['Info']['html_code'], 'utf-8//IGNORE', $html);
         preg_match_all("'<\s*a\s.*?href\s*=\s*([\"\']?)(?(1)(.*?)\\1|([^\s\>]+))[^>]*>?(.*?)</a>'isx",$html,$links);
-
+pr($links[2]);
         if(empty($links)){
             echo json_encode(array('status'=>500,'data'=>''));
         }else{
@@ -239,7 +239,7 @@ class ToolController extends Controller
                     $links_full[]=$link_info['scheme'].'://'.$link_info['host'].$link_info['path'].$link_info['query'];
                 }
 
-                
+                pd($links_full);
             }
             $links_full=array_unique($links_full);
             //过滤array_unique引起的空白索引

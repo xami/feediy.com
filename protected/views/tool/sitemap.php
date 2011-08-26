@@ -96,18 +96,47 @@ for(var a in obj){
 return b;
 };
 
+function in_array(stringToSearch, arrayToSearch) {
+        for (s = 0; s < arrayToSearch.length; s++) {
+                thisEntry = arrayToSearch[s].toString();
+                if (thisEntry == stringToSearch) {
+                        return true;
+                }
+        }
+        return false;
+}
+
+Array.prototype.distinct3 = function(sr){
+    //需要考虑数组内容中包含boolean,string类型数据。
+    var newArray=[] , provisionalTable = {};
+    for (var i = 0, item; (item= this[i]) != null; i++) {
+        if (!provisionalTable[item] && item != "") {
+            if(!in_array(item,sr)){
+                newArray.push(item);
+            }
+            provisionalTable[item] = true;
+         }
+     }
+    return newArray;
+};
+
+
+
 (function($) {
     $.fn.siteMap = function(settings) {
         var the_url = '';
         var url_data = new Array(3);
         var url_depth = 0;
+        var coll_url=[];
 
         settings = jQuery.extend({
             api_url: '/tool/getlinks'
         },settings || {});
         
         this.click(function (){
-//            var a = [1,323,'ada','3',3,'4','bb','','bb'];
+//            var a = [1,323,'ada','3',3,'4','bb',''];
+//            var b = ['323','3','bb','','ss','5t'];
+//            alert(b.distinct3(a));
 //            document.write(a, ' <br/> ');
 //            document.write(a.unquie(), ' <br/> ');
 //            _trace(the_url, 'alert');
@@ -126,12 +155,13 @@ return b;
                     if(url_data[url_depth]!='' && url_data[url_depth]!=undefined){
                         the_url = url_data[url_depth].shift();
                     }else{
-                        return '';
+                        the_url = '';
                     }
                 }
             }
-
-            $('#deep_'+url_depth).html('<p>', the_url.link(the_url), '</p>');
+            alert(the_url);
+            coll_url.push(the_url);
+            $('#deep_'+url_depth).html('').html('<p>' + the_url.link(the_url) + '</p>');
         }
 
         var _run = function(){
@@ -156,14 +186,17 @@ return b;
                 _run();
                 return false;
             }
-            if(url_depth<3){
+            if(url_depth<4){
                 var url_depth_top=url_depth+1;
                 if(url_data[url_depth_top]==undefined){
                     url_data[url_depth_top]=[];
                 }
                 for(var i=0;i<list.count;i++){
                     var one_url=list.data[i];
-                    url_data[url_depth_top].push(one_url);
+                    if(!in_array(one_url,coll_url)){
+                        url_data[url_depth_top].push(one_url);
+                        coll_url.push(one_url);
+                    }
                 }
             }
             _run();
