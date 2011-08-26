@@ -120,7 +120,6 @@ return b;
                 the_url = $("#initurl").val();
             }else{
                 if(url_data[url_depth]!='' && url_data[url_depth]!=undefined){
-//                    _trace(url_data[url_depth], 'alert');
                     the_url = url_data[url_depth].shift();
                 }else{
                     url_depth++;
@@ -132,7 +131,7 @@ return b;
                 }
             }
 
-            $('#deep_'+url_depth).append('<p>', the_url.link(the_url), '</p>');
+            $('#deep_'+url_depth).html('<p>', the_url.link(the_url), '</p>');
         }
 
         var _run = function(){
@@ -167,7 +166,6 @@ return b;
                     url_data[url_depth_top].push(one_url);
                 }
             }
-//            document.write(url_data);
             _run();
         };
 
