@@ -32,6 +32,10 @@ $cs->registerCoreScript('jquery');
 	padding-left: 30px;
 	padding-bottom: 5px;
 }
+
+#box{
+    float: left;
+}
 .ibox {
     background: none repeat scroll 0 0 #E5ECF9;
     border: 2px solid #CCCCCC;
@@ -48,6 +52,44 @@ $cs->registerCoreScript('jquery');
     width: 60px;
 }
 
+#info{
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 33px;
+    float: right;
+}
+    #info .ih{
+        float: left;
+        width: 180px;
+    }
+    #info .ib{
+        float: left;
+        width: 180px;
+    }
+
+#deep{
+    clear: both;
+}
+    #deep .up{
+        border-bottom: 1px solid #AAC1DE;
+        background-color: #C1D9F3;
+        padding: 6px 7px 4px;
+    }
+    #deep .down{
+        background-color: #F2F4F6;
+        border-bottom: 1px solid #C1C8D2;
+        padding: 6px 7px 4px;
+    }
+
+#setting{
+    margin: 5px;
+}
+    #setting .msbox {
+    background: none repeat scroll 0 0 #E5ECF9;
+    border: 2px solid #CCCCCC;
+    font: 14px "Trebuchet MS","Helvetica",sans-serif;
+    height: 19px;
+}
 </style>
 
 <h1>网站地图自动生成V0.1(免费)</h1>
@@ -58,16 +100,19 @@ $cs->registerCoreScript('jquery');
 <div class="four">程序会自动分析目标网站的内容并生成网站地图,不限页数,当前版本只支持两层逻辑深度</div>
 <div id="msg">整理出的网站地图内容系FeeDiy根据您的指令自动整理的结果,不代表FeeDiy赞成被整理网站的内容或立场</div>
 
-<input class="ibox" type="text" value="http://www.mtianya.com" size="63" name="initurl" id="initurl">
-<input class="but" type="button" value="分析" id="st1">
+<div id="setting">
+    爬行延时:&nbsp;&nbsp;<input class="msbox" type="text" value="1000" size="6" name="ms" id="ms">毫秒
+</div>
+<div id="box">
+    <input class="ibox" type="text" value="http://www.mtianya.com" size="63" name="initurl" id="initurl">
+    <input class="but" type="button" value="分析" id="st1">
+</div>
+<div id="info"></div>
+    
 <br />
-    <table>
-<tr>
-<td id="deep_0"></td>
-<td id="deep_1"></td>
-<td id="deep_2"></td>
-</tr>
-    </table>
+
+<div id="deep"></div>
+
 <script type="text/javascript">
 //<![CDATA[
 Array.prototype.distinct1 = function(){
@@ -120,14 +165,14 @@ Array.prototype.distinct3 = function(sr){
     return newArray;
 };
 
-
-
 (function($) {
     $.fn.siteMap = function(settings) {
-        var the_url = '';
         var url_data = new Array(3);
-        var url_depth = 0;
         var coll_url=[];
+        
+        var info={};
+        info.the_url='';
+        info.url_depth=0;
 
         settings = jQuery.extend({
             api_url: '/tool/getlinks'
@@ -139,36 +184,58 @@ Array.prototype.distinct3 = function(sr){
 //            alert(b.distinct3(a));
 //            document.write(a, ' <br/> ');
 //            document.write(a.unquie(), ' <br/> ');
-//            _trace(the_url, 'alert');
+//            _trace(info.the_url, 'alert');
             _run();
         });
 
+        var show_links=[];
+        var style='up';
+        var show_info = function(){
+            var m = Math.round((info.count/coll_url.length)*10000)/100;
+            $("#info").html('').html('<div class="ih">发现链接:'+coll_url.length+'</div><div class="ib">已经爬行:'+info.count+'页('+m+'%)</div>');
+            
+            if(info.url_depth>1){
+                show_links.unshift(info.the_url);
+                show_links=show_links.slice(0,14);
+                style=(style=='up') ? 'down' : 'up';
+                var show_html='';
+                for(var i=0;i<show_links.length;i++){
+                    show_html+='<div class="'+style+'">[('+ (info.count-i) +')链接速度:' + info.url_depth + ']&nbsp;'+show_links[i].link(show_links[i]) + '</div>';
+                    style=(style=='up') ? 'down' : 'up';
+                }
+                $('#deep').html('').html(show_html);
+            }
+        }
+        
         var get_the_url = function(){
-            if(url_depth==0){
-                url_depth++;
-                the_url = $("#initurl").val();
+            if(info.url_depth==0){
+                info.url_depth++;
+                info.the_url = $("#initurl").val();
+                info.count=1;
             }else{
-                if(url_data[url_depth]!='' && url_data[url_depth]!=undefined){
-                    the_url = url_data[url_depth].shift();
+                if(url_data[info.url_depth]!='' && url_data[info.url_depth]!=undefined){
+                    info.the_url = url_data[info.url_depth].shift();
                 }else{
-                    url_depth++;
-                    if(url_data[url_depth]!='' && url_data[url_depth]!=undefined){
-                        the_url = url_data[url_depth].shift();
+                    info.url_depth++;
+                    if(url_data[info.url_depth]!='' && url_data[info.url_depth]!=undefined){
+                        info.the_url = url_data[info.url_depth].shift();
                     }else{
-                        the_url = '';
+                        info.the_url = '';
                     }
                 }
             }
-            alert(the_url);
-            coll_url.push(the_url);
-            $('#deep_'+url_depth).html('').html('<p>' + the_url.link(the_url) + '</p>');
+//            alert(info.the_url+info.url_depth);
+            coll_url.push(info.the_url);
+            return info.the_url;
         }
 
         var _run = function(){
             get_the_url();
-            if(the_url!=''){
+            if(info.the_url!=''){
+                info.count++;
                 _get_url_list();
             }
+            show_info();
         }
 
         var _get_url_list = function (){
@@ -176,18 +243,19 @@ Array.prototype.distinct3 = function(sr){
                 'url':settings.api_url,
                 'success':_save_url_list,
                 'dataType':'json',
-                'data':{'src':the_url},
+                'data':{'src':info.the_url, 'ms':$("#ms").val()},
                 'cache':false
             });
         }
 
+        
         var _save_url_list = function (list){
             if(list==null || list.status==null || list.status!=200 || list.data==null){
                 _run();
                 return false;
             }
-            if(url_depth<4){
-                var url_depth_top=url_depth+1;
+            if(info.url_depth<3){
+                var url_depth_top=info.url_depth+1;
                 if(url_data[url_depth_top]==undefined){
                     url_data[url_depth_top]=[];
                 }

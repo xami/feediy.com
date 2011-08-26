@@ -90,10 +90,10 @@ $curl->close();
 
 class ToolController extends Controller
 {
-	public function actionIndex()
-	{
-		$this->render('index');
-	}
+//	public function actionIndex()
+//	{
+//		$this->render('index');
+//	}
 
     public function actionSitemap()
 	{
@@ -176,25 +176,25 @@ class ToolController extends Controller
         }
         $html=iconv($page['Info']['html_code'], 'utf-8//IGNORE', $html);
         preg_match_all("'<\s*a\s.*?href\s*=\s*([\"\']?)(?(1)(.*?)\\1|([^\s\>]+))[^>]*>?(.*?)</a>'isx",$html,$links);
-pr($links[2]);
+
         if(empty($links)){
             echo json_encode(array('status'=>500,'data'=>''));
         }else{
             unset($src_info);
             $src_info=parse_url($src);
-//            pr($src_info);
+//            pr($links[2]);
+
             $links_full=array();
             foreach($links[2] as $link){
-                if(!Tools::is_url($link)){
-                    continue;
-                }
+
                 $link=trim($link);
                 
                 unset($link_info);
                 $link_info=parse_url($link);
+//                pr($link_info);
                 
                 if(strpos($link, 'http://')>0){
-                    $links_full[]=$src_info['scheme'].'://'.$src_info['host'].'/'.$link;
+                    $link_tmp=$src_info['scheme'].'://'.$src_info['host'].'/'.$link;
                     continue;
                 }
                 if($link_info['scheme']=='mailto' || $link_info['scheme']=='javascript'){
@@ -230,16 +230,19 @@ pr($links[2]);
 //                }
 
                 if(!isset($link_info['scheme']) || empty($link_info['scheme']) || !isset($link_info['host']) || empty($link_info['host'])){
-                    $links_full[]=$src_info['scheme'].'://'.$src_info['host'].$link_info['path'].$link_info['query'];
+                    $link_tmp=$src_info['scheme'].'://'.$src_info['host'].$link_info['path'].$link_info['query'];
                 }else{
                     //不是当前域名下的链接跳过
                     if(($src_info['scheme']!=$link_info['scheme']) || ($src_info['host']!=$link_info['host'])){
                         continue;
                     }
-                    $links_full[]=$link_info['scheme'].'://'.$link_info['host'].$link_info['path'].$link_info['query'];
+                    $link_tmp=$link_info['scheme'].'://'.$link_info['host'].$link_info['path'].$link_info['query'];
                 }
 
-                pd($links_full);
+                if(Tools::is_url($link_tmp)){
+                    $links_full[]=$link_tmp;
+                }
+//                pd($links_full);
             }
             $links_full=array_unique($links_full);
             //过滤array_unique引起的空白索引
@@ -249,7 +252,15 @@ pr($links[2]);
                     $ct_link[]=html_entity_decode($the_link);
                 }
             }
+            
+            ob_implicit_flush(true);
+            $ms=intval(Yii::app()->request->getParam('ms', 0));
+            if($ms>0){
+                usleep ($ms);
+            }
+
             echo json_encode(array('status'=>200,'count'=>count($links_full),'data'=>$ct_link));
+            flush();
         }
 
     }
