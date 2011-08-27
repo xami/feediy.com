@@ -101,11 +101,12 @@ $cs->registerCoreScript('jquery');
 <div id="msg">整理出的网站地图内容系FeeDiy根据您的指令自动整理的结果,不代表FeeDiy赞成被整理网站的内容或立场</div>
 
 <div id="setting">
-    爬行延时:&nbsp;&nbsp;<input class="msbox" type="text" value="1000" size="6" name="ms" id="ms">毫秒
+    <p>爬行延时:&nbsp;&nbsp;<input class="msbox" type="text" value="1000" size="6" name="ms" id="ms">毫秒</p>
 </div>
 <div id="box">
-    <input class="ibox" type="text" value="http://www.mtianya.com" size="63" name="initurl" id="initurl">
-    <input class="but" type="button" value="分析" id="st1">
+    <input class="ibox" type="text" value="http://www.mtianya.com" size="63" name="initurl" id="initurl" />
+    <input class="but" type="button" value="分析" id="st1" />
+    <input class="but" type="button" value="导出" id="do_create_mp" />
 </div>
 <div id="info"></div>
     
@@ -209,10 +210,28 @@ Array.prototype.distinct3 = function(sr){
         }
 
         settings = jQuery.extend({
-            max_depth: 3, 
-            api_url: '/tool/getlinks'
+            max_depth: 3
+            , api_url: '/tool/getlinks'
+            //, api_mp: '/tool/create_mp'
         },settings || {});
-        
+
+        $("#do_create_mp").click(function (){
+//            var mp_data='';
+//            for(var i=0;i<os_mp.length;i++){
+//                mp_data+='mp['+os_mp[i]['depth']+'][]='+os_mp[i]['link']+'&';
+//            }
+//            jQuery.ajax({
+//                'url':settings.api_mp,
+//                'success':alert('ok'),
+//                'dataType':'json',
+//                'data':mp_data,
+//                'type': 'POST',
+//                'cache':false
+//            });
+
+            
+        });
+
         this.click(function (){
 //            var a = [1,323,'ada','3',3,'4','bb',''];
 //            var b = ['323','3','bb','','ss','5t'];
@@ -272,7 +291,7 @@ Array.prototype.distinct3 = function(sr){
             if(info.the_url==true){
                 alert('谢谢,爬行完成,接下来你可以导出整理的网站地图');
                 _stop_run();
-                alert(os_mp);
+//                alert(os_mp[0]['link']);
                 return true;
             }
             if(info.the_url!=''){
@@ -315,7 +334,8 @@ Array.prototype.distinct3 = function(sr){
                     if(!in_array(list.data[i],coll_url)){
                         url_data[url_depth_top].push(list.data[i]);
                         coll_url.push(list.data[i]);
-                        obj_coll_cur["list.data[i]"]=info.url_depth;
+                        obj_coll_cur["link"]=list.data[i];
+                        obj_coll_cur["depth"]=info.url_depth;
                         os_mp.push(obj_coll_cur);
                     }
                 }

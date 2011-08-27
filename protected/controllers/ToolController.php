@@ -274,6 +274,11 @@ class ToolController extends Controller
 
     }
 
+    public function actionCreate_mp()
+    {
+        pd($_REQUEST);
+    }
+
     public function actionTest()
 	{
 //        var_dump(substr('.afas', 0, 1)!='.') ;
