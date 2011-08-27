@@ -132,9 +132,18 @@ class ToolController extends Controller
 
     public function actionGetlinks()
     {
-        $expire = isset($_REQUEST['expire']) ? intval($_REQUEST['expire']) : 3000;
-		$src = isset($_REQUEST['src']) ? trim($_REQUEST['src']) : '';
 
+        $expire=intval(Yii::app()->request->getParam('expire', 3600));
+        $src=trim(Yii::app()->request->getParam('src', ''));
+        if(empty($src)){
+            echo json_encode(array('status'=>500,'data'=>'输入需要整理地图的网址'));
+            die;
+        }
+        if(!Tools::is_url($src)){
+            echo json_encode(array('status'=>500,'data'=>'输入正确的网址'));
+            die;
+        }
+        
         $page=Tools::OZCurl($src, $expire);
 
         if(empty($page)){
