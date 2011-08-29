@@ -248,13 +248,13 @@ Array.prototype.distinct3 = function(sr){
             info.url_depth=0;
         }
 
-        var save_mp = function(info){
+        var save_mp = function(rinfo){
             alert('网站地图生成成功，请点下面的链接进入下载！');
-            if(info.status==false){
-                $("#box").append(info.msg);
+            if(rinfo.status==false){
+                $("#box").append(rinfo.msg);
             }else if(info.status==true){
                 var t_mp=info.index+'网站地图';
-                $("#box").html('<span id="sitemap">'+t_mp.link(info.msg)+'</span>');
+                $("#box").html('<span id="sitemap">'+t_mp.link(rinfo.msg)+'</span>');
             }
         }
 
