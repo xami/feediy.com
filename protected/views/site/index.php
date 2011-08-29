@@ -55,9 +55,9 @@ $cs->registerCoreScript('jquery');
     font-size: 14px;
     font-weight: bold;
     line-height: 33px;
-    float: right;
 }
     #info .ih{
+        margin-left: 50px;
         float: left;
         width: 180px;
     }
@@ -92,7 +92,7 @@ $cs->registerCoreScript('jquery');
 }
 
 #sitemap a{
-    float: right;
+    float: left;
     font-size: 16px;
     color: red;
 }
@@ -256,7 +256,7 @@ Array.prototype.distinct3 = function(sr){
             if(rinfo.status==false){
                 $("#info").prepend(rinfo.msg);
             }else if(rinfo.status==true){
-                var t_mp=info.index+'_网站地图_sitemap.xml';
+                var t_mp=info.index+'/sitemap.xml';
                 $("#info").prepend('<span id="sitemap"><a href="'+rinfo.msg+'" target="_blank">'+t_mp+'</a></span>');
             }
         }
