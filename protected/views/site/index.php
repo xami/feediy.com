@@ -228,6 +228,7 @@ Array.prototype.distinct3 = function(sr){
         var coll_url=[];
         var info={};
         var os_mp=[];
+        var ct=true;
 
 
         var _start_run = function(){
@@ -250,11 +251,13 @@ Array.prototype.distinct3 = function(sr){
 
         var save_mp = function(rinfo){
             alert('网站地图生成成功，请点下面的链接进入下载！');
+            $("#box").hide();
+            ct=false;
             if(rinfo.status==false){
-                $("#box").append(rinfo.msg);
+                $("#info").prepend(rinfo.msg);
             }else if(rinfo.status==true){
                 var t_mp=info.index+'_网站地图_sitemap.xml';
-                $("#box").html('<span id="sitemap">'+t_mp.link(rinfo.msg)+'</span>');
+                $("#info").prepend('<span id="sitemap"><a href="'+rinfo.msg+'" target="_blank">'+t_mp+'</a></span>');
             }
         }
 
@@ -363,6 +366,9 @@ Array.prototype.distinct3 = function(sr){
         }
 
         var _run = function(){
+            if(ct==false){
+                return;
+            }
             get_the_url();
             if(info.the_url==true){
                 alert('谢谢,爬行完成,接下来你可以导出整理的网站地图');
