@@ -200,7 +200,10 @@ class ToolController extends Controller
                 
                 unset($link_info);
                 $link_info=parse_url($link);
-//                pr($link_info);
+                if(!isset($link_info['scheme'])){
+                    $link_info['scheme']='http';
+                }
+//                pd($link_info);
                 
                 if(strpos($link, 'http://')>0){
                     $link_tmp=$src_info['scheme'].'://'.$src_info['host'].'/'.$link;

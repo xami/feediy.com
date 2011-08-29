@@ -114,6 +114,9 @@ $cs->registerCoreScript('jquery');
 
 <div id="deep"></div>
 
+<hr />
+<div id="xml"></div>
+
 <script type="text/javascript">
 //<![CDATA[
 /*
@@ -143,6 +146,33 @@ for(var a in obj){
 return b;
 };
 */
+
+function    HTMLEnCode(str)
+{
+     var    s    =    "";
+     if    (str.length    ==    0)    return    "";
+     s    =    str.replace(/&/g,    "&gt;");
+     s    =    s.replace(/</g,        "&lt;");
+     s    =    s.replace(/>/g,        "&gt;");
+     s    =    s.replace(/    /g,        "&nbsp;");
+     s    =    s.replace(/\'/g,      "&#39;");
+     s    =    s.replace(/\"/g,      "&quot;");
+     s    =    s.replace(/\n/g,      "<br>");
+     return    s;
+}
+function    HTMLDeCode(str)  
+{
+     var    s    =    "";
+     if    (str.length    ==    0)    return    "";
+     s    =    str.replace(/&gt;/g,    "&");
+     s    =    s.replace(/&lt;/g,        "<");
+     s    =    s.replace(/&gt;/g,        ">");
+     s    =    s.replace(/&nbsp;/g,        "    ");
+     s    =    s.replace(/&#39;/g,      "\'");
+     s    =    s.replace(/&quot;/g,      "\"");
+     s    =    s.replace(/<br>/g,      "\n");
+     return    s;
+}
 
 function in_array(stringToSearch, arrayToSearch) {
         for (s = 0; s < arrayToSearch.length; s++) {
@@ -229,6 +259,31 @@ Array.prototype.distinct3 = function(sr){
 //                'cache':false
 //            });
 
+            var xml_head='<\?xml version="1.0" encoding="UTF-8"\?>'+"\n"+'\
+<urlset '+"\n"+'\
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '+"\n"+'\
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" '+"\n"+'\
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 '+"\n"+'\
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">'+"\n"+'\
+<!-- created with Free Online Sitemap Generator www.feediy.com -->'+"\n\n"+'\
+';
+
+            var xml_body='';
+            var priority=new Number();
+            for(var i=0;i<os_mp.length;i++){
+                priority=1.0-(os_mp[i]['depth']*0.2);
+                xml_body+=
+'<url>'+"\n"+'\
+    <loc>'+encodeURI(os_mp[i]['link'])+'</loc>'+"\n"+'\
+    <changefreq>hourly</changefreq>'+"\n"+'\
+    <priority>'+priority+'</priority>'+"\n"+'\
+</url>'+"\n"+'\
+';
+            }
+
+            var xml_footer='</urlset>';
+
+            $("#xml").html(HTMLEnCode(xml_head+xml_body+xml_footer));
             
         });
 
