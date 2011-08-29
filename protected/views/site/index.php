@@ -252,7 +252,7 @@ Array.prototype.distinct3 = function(sr){
             alert('网站地图生成成功，请点下面的链接进入下载！');
             if(rinfo.status==false){
                 $("#box").append(rinfo.msg);
-            }else if(info.status==true){
+            }else if(rinfo.status==true){
                 var t_mp=info.index+'网站地图';
                 $("#box").html('<span id="sitemap">'+t_mp.link(rinfo.msg)+'</span>');
             }
