@@ -2,6 +2,14 @@
 $cs=Yii::app()->clientScript;
 $cs->registerCoreScript('jquery');
 
+$js=<<<EOD
+
+EOD;
+
+$packer = new JavaScriptPacker($js, 'None', true, false);
+$packed = $packer->pack();
+$cs->registerScript('items', $packed, CClientScript::POS_END);
+
 ?>
 <style type="text/css">
 #msg {
@@ -34,7 +42,7 @@ $cs->registerCoreScript('jquery');
 }
 
 #box{
-    float: left;
+    clear: both;
 }
 .ibox {
     background: none repeat scroll 0 0 #E5ECF9;
@@ -91,6 +99,9 @@ $cs->registerCoreScript('jquery');
     height: 19px;
 }
 
+#sitemap{
+    float: left;
+}
 #sitemap a{
     float: left;
     font-size: 16px;
@@ -126,7 +137,7 @@ $cs->registerCoreScript('jquery');
 <div id="xml"></div>
 
 <script type="text/javascript">
-//<![CDATA[
+/*<![CDATA[*/
 /*
 Array.prototype.distinct1 = function(){
     //需要考虑数组内容中包含boolean,string类型数据。
@@ -168,7 +179,7 @@ function    HTMLEnCode(str)
      s    =    s.replace(/\n/g,      "<br>");
      return    s;
 }
-function    HTMLDeCode(str)  
+function    HTMLDeCode(str)
 {
      var    s    =    "";
      if    (str.length    ==    0)    return    "";
@@ -250,13 +261,13 @@ Array.prototype.distinct3 = function(sr){
         }
 
         var save_mp = function(rinfo){
-            alert('网站地图生成成功，请点下面的链接进入下载！');
+            alert('马上将生成网站地图，请点击生成的红色链接查看或者另存为！');
             $("#box").hide();
             ct=false;
             if(rinfo.status==false){
                 $("#info").prepend(rinfo.msg);
             }else if(rinfo.status==true){
-                var t_mp=info.index+'/sitemap.xml(请另存为)';
+                var t_mp=info.index+'/sitemap.xml(点击查看或另存为)';
                 $("#info").prepend('<span id="sitemap"><a href="'+rinfo.msg+'" target="_blank">'+t_mp+'</a></span>');
             }
         }
@@ -328,7 +339,7 @@ Array.prototype.distinct3 = function(sr){
         var show_info = function(){
             var m = Math.round((info.count/coll_url.length)*10000)/100;
             $("#info").html('').html('<div class="ih">发现链接:'+coll_url.length+'</div><div class="ib">已经爬行:'+info.count+'页('+m+'%)</div>');
-            
+
             if(info.url_depth>1){
                 show_links.unshift(info.the_url);
                 show_links=show_links.slice(0,14);
@@ -341,7 +352,7 @@ Array.prototype.distinct3 = function(sr){
                 $('#deep').html('').html(show_html);
             }
         }
-        
+
         var get_the_url = function(){
             if(info.url_depth==0){
                 info.url_depth++;
@@ -394,7 +405,7 @@ Array.prototype.distinct3 = function(sr){
             });
         }
 
-        
+
         var _save_url_list = function (list){
             if(list==null || list.status==null || list.status!=200){
                 if(list.data!=''){
@@ -487,5 +498,5 @@ Array.prototype.distinct3 = function(sr){
     }
 })(jQuery);
 $('#st1').siteMap();
-//]]>
+/*]]>*/
 </script>

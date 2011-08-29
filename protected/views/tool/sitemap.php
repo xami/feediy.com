@@ -2,6 +2,14 @@
 $cs=Yii::app()->clientScript;
 $cs->registerCoreScript('jquery');
 
+$js=<<<EOD
+
+EOD;
+
+$packer = new JavaScriptPacker($js, 'None', true, false);
+$packed = $packer->pack();
+$cs->registerScript('items', $packed, CClientScript::POS_END);
+
 ?>
 <style type="text/css">
 #msg {
@@ -10,7 +18,7 @@ $cs->registerCoreScript('jquery');
     height: 20px;
     line-height: 20px;
     text-align: center;
-    margin: 20px 0;
+    margin-bottom: 10px;
 }
 .one {
 	background: url(/images/circular-1.gif) top left no-repeat;
@@ -34,7 +42,7 @@ $cs->registerCoreScript('jquery');
 }
 
 #box{
-    float: left;
+    clear: both;
 }
 .ibox {
     background: none repeat scroll 0 0 #E5ECF9;
@@ -49,16 +57,15 @@ $cs->registerCoreScript('jquery');
     cursor: pointer;
     height: 30px;
     margin-left: 5px;
-    width: 60px;
 }
 
 #info{
     font-size: 14px;
     font-weight: bold;
     line-height: 33px;
-    float: right;
 }
     #info .ih{
+        margin-left: 50px;
         float: left;
         width: 180px;
     }
@@ -83,6 +90,7 @@ $cs->registerCoreScript('jquery');
 
 #setting{
     margin: 5px;
+    display: none;
 }
     #setting .msbox {
     background: none repeat scroll 0 0 #E5ECF9;
@@ -90,35 +98,46 @@ $cs->registerCoreScript('jquery');
     font: 14px "Trebuchet MS","Helvetica",sans-serif;
     height: 19px;
 }
+
+#sitemap{
+    float: left;
+}
+#sitemap a{
+    float: left;
+    font-size: 16px;
+    color: red;
+}
 </style>
 
-<h1>网站地图自动生成V0.1(免费)</h1>
-<div id="msg">请知晓下面的事项,欢迎反馈使用中遇到的问题(点上面的联系,在线发邮件给我)</div>
-<div class="one">可以自由分发整理的结果,请保留本站的链接以及保证内容的完整性,请把生成的文件上传到你的网站根目录</div>
-<div class="two">程序只识别正常的html链接,忽略js生成的跳转代码,忽略其他域名的链接</div>
-<div class="three">程序采用单线程取得内容,不会对目标服务器造成很大压力</div>
-<div class="four">程序会自动分析目标网站的内容并生成网站地图,不限页数,当前版本只支持两层逻辑深度</div>
-<div id="msg">整理出的网站地图内容系FeeDiy根据您的指令自动整理的结果,不代表FeeDiy赞成被整理网站的内容或立场</div>
+<h1>飞度网站地图自动生成工具(免费无限制),Free Online Sitemap Generator</h1>
+<div id="msg">请知晓下面的事项,欢迎反馈使用中遇到的问题(点上面的联系,在线发邮件给站长)</div>
+<div class="one">网站地图生成工具,适用于baidu,google等搜索引擎的自动收录,可以自由分发整理的网站地图结果,请保留本站的链接以及保证内容的完整性</div>
+<div class="two">程序按页面逻辑深度顺序搜集当前网站包含的链接,只识别正常的html链接,忽略js生成的跳转代码以及文本形式的链接,忽略其他域名的链接,不检查链接的状态,只要发现的页面有包含即加入网站地图列表</div>
+<div class="three">程序采用单线程取得内容,不会对目标服务器造成很大压力,程序自动爬行的页面数据会缓存1个小时,如果网站有更新,请1个小时后再重试,否则内容不会变化,超过2层逻辑的页面会有很多冗余的链接,不必等待程序完全爬行完,直接可以导出当前已经发现的链接为网站地图</div>
+<div class="four">程序会自动分析目标网站的内容并生成网站地图,不限页数,当前版本只支持两层逻辑深度,请把生成的网站地图文件上传到你的网站根目录,可以重命名为sitemap.xml或者在网站首页给出指向此网站地图的链接,以便搜索引擎及时发现</div>
+<div id="msg">整理出的网站地图内容系FEEDIY.COM网站根据您的指令自动整理的结果,不代表FEEDIY.COM赞成被整理网站的内容或立场</div>
 
 <div id="setting">
     <p>爬行延时:&nbsp;&nbsp;<input class="msbox" type="text" value="1000" size="6" name="ms" id="ms">毫秒</p>
 </div>
+    <hr />
 <div id="box">
     <input class="ibox" type="text" value="http://www.mtianya.com" size="63" name="initurl" id="initurl" />
     <input class="but" type="button" value="分析" id="st1" />
-    <input class="but" type="button" value="导出" id="do_create_mp" />
+    <input class="but" style="display: none;" type="button" value="生成网站地图" id="do_create_mp" />
 </div>
+    
 <div id="info"></div>
     
 <br />
 
 <div id="deep"></div>
 
-<hr />
+
 <div id="xml"></div>
 
 <script type="text/javascript">
-//<![CDATA[
+/*<![CDATA[*/
 /*
 Array.prototype.distinct1 = function(){
     //需要考虑数组内容中包含boolean,string类型数据。
@@ -160,7 +179,7 @@ function    HTMLEnCode(str)
      s    =    s.replace(/\n/g,      "<br>");
      return    s;
 }
-function    HTMLDeCode(str)  
+function    HTMLDeCode(str)
 {
      var    s    =    "";
      if    (str.length    ==    0)    return    "";
@@ -220,10 +239,12 @@ Array.prototype.distinct3 = function(sr){
         var coll_url=[];
         var info={};
         var os_mp=[];
+        var ct=true;
 
 
         var _start_run = function(){
             $("#st1").attr({"disabled":"disabled"});
+            $("#do_create_mp").show();
         }
 
         var _stop_run = function(){
@@ -239,9 +260,16 @@ Array.prototype.distinct3 = function(sr){
             info.url_depth=0;
         }
 
-        var save_mp = function(){
-            alert('网站地图生成成功，请点下面的链接进入下载！');
-
+        var save_mp = function(rinfo){
+            alert('马上将生成网站地图，请点击生成的红色链接查看或者另存为！');
+            $("#box").hide();
+            ct=false;
+            if(rinfo.status==false){
+                $("#info").prepend(rinfo.msg);
+            }else if(rinfo.status==true){
+                var t_mp=info.index+'/sitemap.xml(点击查看或另存为)';
+                $("#info").prepend('<span id="sitemap"><a href="'+rinfo.msg+'" target="_blank">'+t_mp+'</a></span>');
+            }
         }
 
         settings = jQuery.extend({
@@ -311,7 +339,7 @@ Array.prototype.distinct3 = function(sr){
         var show_info = function(){
             var m = Math.round((info.count/coll_url.length)*10000)/100;
             $("#info").html('').html('<div class="ih">发现链接:'+coll_url.length+'</div><div class="ib">已经爬行:'+info.count+'页('+m+'%)</div>');
-            
+
             if(info.url_depth>1){
                 show_links.unshift(info.the_url);
                 show_links=show_links.slice(0,14);
@@ -324,10 +352,11 @@ Array.prototype.distinct3 = function(sr){
                 $('#deep').html('').html(show_html);
             }
         }
-        
+
         var get_the_url = function(){
             if(info.url_depth==0){
                 info.url_depth++;
+                info.index = $("#initurl").val();
                 info.the_url = $("#initurl").val();
                 info.count=1;
             }else{
@@ -348,6 +377,9 @@ Array.prototype.distinct3 = function(sr){
         }
 
         var _run = function(){
+            if(ct==false){
+                return;
+            }
             get_the_url();
             if(info.the_url==true){
                 alert('谢谢,爬行完成,接下来你可以导出整理的网站地图');
@@ -373,7 +405,7 @@ Array.prototype.distinct3 = function(sr){
             });
         }
 
-        
+
         var _save_url_list = function (list){
             if(list==null || list.status==null || list.status!=200){
                 if(list.data!=''){
@@ -466,5 +498,5 @@ Array.prototype.distinct3 = function(sr){
     }
 })(jQuery);
 $('#st1').siteMap();
-//]]>
+/*]]>*/
 </script>
