@@ -93,9 +93,9 @@ $cs->registerCoreScript('jquery');
 </style>
 
 <h1>网站地图自动生成V0.1(免费)</h1>
-<div id="msg">请知晓下面的事项</div>
-<div class="one">可以自由分发整理的结果,请保留本站的链接以及保证内容的完整性</div>
-<div class="two">程序只识别正常的html链接,忽略js生成的跳转代码</div>
+<div id="msg">请知晓下面的事项,欢迎反馈使用中遇到的问题(点上面的联系,在线发邮件给我)</div>
+<div class="one">可以自由分发整理的结果,请保留本站的链接以及保证内容的完整性,请把生成的文件上传到你的网站根目录</div>
+<div class="two">程序只识别正常的html链接,忽略js生成的跳转代码,忽略其他域名的链接</div>
 <div class="three">程序采用单线程取得内容,不会对目标服务器造成很大压力</div>
 <div class="four">程序会自动分析目标网站的内容并生成网站地图,不限页数,当前版本只支持两层逻辑深度</div>
 <div id="msg">整理出的网站地图内容系FeeDiy根据您的指令自动整理的结果,不代表FeeDiy赞成被整理网站的内容或立场</div>
@@ -239,26 +239,32 @@ Array.prototype.distinct3 = function(sr){
             info.url_depth=0;
         }
 
+        var save_mp = function(){
+            alert('网站地图生成成功，请点下面的链接进入下载！');
+
+        }
+
         settings = jQuery.extend({
             max_depth: 3
             , api_url: '/tool/getlinks'
-            //, api_mp: '/tool/create_mp'
+            , api_mp: '/tool/create_mp'
         },settings || {});
 
         $("#do_create_mp").click(function (){
-//            var mp_data='';
-//            for(var i=0;i<os_mp.length;i++){
-//                mp_data+='mp['+os_mp[i]['depth']+'][]='+os_mp[i]['link']+'&';
-//            }
-//            jQuery.ajax({
-//                'url':settings.api_mp,
-//                'success':alert('ok'),
-//                'dataType':'json',
-//                'data':mp_data,
-//                'type': 'POST',
-//                'cache':false
-//            });
+            var mp_data='';
+            for(var i=0;i<os_mp.length;i++){
+                mp_data+='mp['+os_mp[i]['depth']+'][]='+os_mp[i]['link']+'&';
+            }
+            jQuery.ajax({
+                'url':settings.api_mp,
+                'success':save_mp,
+                'dataType':'json',
+                'data':mp_data,
+                'type': 'POST',
+                'cache':false
+            });
 
+/*
             var xml_head='<\?xml version="1.0" encoding="UTF-8"\?>'+"\n"+'\
 <urlset '+"\n"+'\
       xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '+"\n"+'\
@@ -284,7 +290,7 @@ Array.prototype.distinct3 = function(sr){
             var xml_footer='</urlset>';
 
             $("#xml").html(HTMLEnCode(xml_head+xml_body+xml_footer));
-            
+*/
         });
 
         this.click(function (){

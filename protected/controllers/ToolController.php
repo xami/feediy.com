@@ -279,7 +279,44 @@ class ToolController extends Controller
 
     public function actionCreate_mp()
     {
-        pd($_REQUEST);
+//        pd($_REQUEST);
+        $mp=Yii::app()->request->getParam('mp', array());
+        if(empty($mp)){
+            echo json_encode(array('status'=>false,'msg'=>'内容为空'));
+            die;
+        }
+
+        $xml_head='<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+   http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.feediy.com -->
+';
+
+        $xml_body='';
+        for($i=1;$i<=3;$i++){
+            if(isset($mp[$i]) && !empty($mp[$i])){
+                $priority=1.0-(0.2*$i);
+                foreach($mp[$i] as  $link){
+                    $xml_body.=
+'<url>'."\r\n".
+'    <loc>'.htmlentities($link).'</loc>'."\r\n".
+'    <changefreq>hourly</changefreq>'."\r\n".
+'    <priority>'.$priority.'</priority>'."\r\n".
+'</url>'."\r\n";
+                }
+            }
+        }
+
+        $xml_foot='</urlset>';
+
+        $time=time();
+        $sitemap_file=Yii::app()->basePath.DIRECTORY_SEPARATOR.'sitemap'.DIRECTORY_SEPARATOR.$time.'.xml';
+        file_put_contents($sitemap_file, $xml_head.$xml_body.$xml_foot);
+
+        echo json_encode(array('status'=>true,'msg'=>'http://www.feediy.com/sitemap/'.$time.'.xml'));
     }
 
     public function actionTest()

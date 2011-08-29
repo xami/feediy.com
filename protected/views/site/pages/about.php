@@ -1,10 +1,9 @@
 <?php
-$this->pageTitle=Yii::app()->name . ' - About';
+$this->pageTitle=Yii::app()->name . ' - 关于';
 $this->breadcrumbs=array(
-	'About',
+	'关于',
 );
 ?>
-<h1>About</h1>
+<h1>关于</h1>
 
-<p>This is a "static" page. You may change the content of this page
-by updating the file <tt><?php echo __FILE__; ?></tt>.</p>
+<p>在线网站地图生成工具</p>
