@@ -101,7 +101,7 @@ $cs->registerCoreScript('jquery');
 <h1>飞度网站地图自动生成工具(免费无限制),Free Online Sitemap Generator</h1>
 <div id="msg">请知晓下面的事项,欢迎反馈使用中遇到的问题(点上面的联系,在线发邮件给站长)</div>
 <div class="one">网站地图生成工具,适用于baidu,google等搜索引擎的自动收录,可以自由分发整理的网站地图结果,请保留本站的链接以及保证内容的完整性</div>
-<div class="two">程序按页面逻辑深度顺序搜集当前网站包含的链接,只识别正常的html链接,忽略js生成的跳转代码,忽略其他域名的链接,不检查链接的状态,只要发现的页面有包含即加入网站地图列表</div>
+<div class="two">程序按页面逻辑深度顺序搜集当前网站包含的链接,只识别正常的html链接,忽略js生成的跳转代码以及文本形式的链接,忽略其他域名的链接,不检查链接的状态,只要发现的页面有包含即加入网站地图列表</div>
 <div class="three">程序采用单线程取得内容,不会对目标服务器造成很大压力,程序自动爬行的页面数据会缓存1个小时,如果网站有更新,请1个小时后再重试,否则内容不会变化,超过2层逻辑的页面会有很多冗余的链接,不必等待程序完全爬行完,直接可以导出当前已经发现的链接为网站地图</div>
 <div class="four">程序会自动分析目标网站的内容并生成网站地图,不限页数,当前版本只支持两层逻辑深度,请把生成的网站地图文件上传到你的网站根目录,可以重命名为sitemap.xml或者在网站首页给出指向此网站地图的链接,以便搜索引擎及时发现</div>
 <div id="msg">整理出的网站地图内容系FEEDIY.COM网站根据您的指令自动整理的结果,不代表FEEDIY.COM赞成被整理网站的内容或立场</div>
@@ -256,7 +256,7 @@ Array.prototype.distinct3 = function(sr){
             if(rinfo.status==false){
                 $("#info").prepend(rinfo.msg);
             }else if(rinfo.status==true){
-                var t_mp=info.index+'/sitemap.xml';
+                var t_mp=info.index+'/sitemap.xml(请另存为)';
                 $("#info").prepend('<span id="sitemap"><a href="'+rinfo.msg+'" target="_blank">'+t_mp+'</a></span>');
             }
         }
