@@ -253,8 +253,8 @@ Array.prototype.distinct3 = function(sr){
             if(info.status==false){
                 $("#box").append(info.msg);
             }else if(info.status==true){
-                var t_mp='网站地图';
-                $("#box").append('<span id="sitemap">'+t_mp.link(info.msg)+'</span>');
+                var t_mp=info.index+'网站地图';
+                $("#box").html('<span id="sitemap">'+t_mp.link(info.msg)+'</span>');
             }
         }
 
@@ -342,6 +342,7 @@ Array.prototype.distinct3 = function(sr){
         var get_the_url = function(){
             if(info.url_depth==0){
                 info.url_depth++;
+                info.index = $("#initurl").val();
                 info.the_url = $("#initurl").val();
                 info.count=1;
             }else{
