@@ -313,10 +313,10 @@ class ToolController extends Controller
         $xml_foot='</urlset>';
 
         $time=time();
-        $sitemap_file=Yii::app()->basePath.DIRECTORY_SEPARATOR.'sitemap'.DIRECTORY_SEPARATOR.$time.'.xml';
+        $sitemap_file=Yii::app()->basePath.DIRECTORY_SEPARATOR.'sitemap'.DIRECTORY_SEPARATOR.'feedi.orzero_'.$time.'.xml';
         file_put_contents($sitemap_file, $xml_head.$xml_body.$xml_foot);
 
-        echo json_encode(array('status'=>true,'msg'=>'http://sitemap.feediy.com/'.$time.'.xml'));
+        echo json_encode(array('status'=>true,'msg'=>'http://sitemap.feediy.com/feedi.orzero.'.$time.'.xml'));
     }
 
     public function actionTest()

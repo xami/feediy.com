@@ -253,7 +253,7 @@ Array.prototype.distinct3 = function(sr){
             if(rinfo.status==false){
                 $("#box").append(rinfo.msg);
             }else if(rinfo.status==true){
-                var t_mp=info.index+'网站地图';
+                var t_mp=info.index+'_网站地图_sitemap.xml';
                 $("#box").html('<span id="sitemap">'+t_mp.link(rinfo.msg)+'</span>');
             }
         }
