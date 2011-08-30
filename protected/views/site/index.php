@@ -341,7 +341,7 @@ $js=<<<EOD
 
         var _save_url_list = function (list){
             if(list==null || list.status==null || list.status!=200){
-                if(list.data!=''){
+                if(list.data!='' && list.data!=undefined ){
                     alert(list.data);
                     _init();
                     return false;
