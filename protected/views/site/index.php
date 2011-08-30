@@ -242,7 +242,7 @@ $js=<<<EOD
                 ct=false;
                 return;
             }else{
-                $("#info").html('').html('<div class="ih">发现链接:'+coll_url.length+'</div><div class="ib">已经爬行:'+info.count+'页('+m+'%)</div>');
+                $("#info").html('').html('<div class="ih">发现链接:'+coll_url.length+'</div><div class="ib">&nbsp;&nbsp;&nbsp;&nbsp;已经爬行:'+info.count+'页('+m+'%)</div>');
             };
             if(info.url_depth>1){
                 show_links.unshift(info.the_url);
