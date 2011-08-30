@@ -159,7 +159,7 @@ $js=<<<EOD
             var mp_data='';
             for(var i=0;i<os_mp.length;i++){
                 mp_data+='mp['+os_mp[i]['depth']+'][]='+os_mp[i]['link']+'&';
-            }
+            };
             jQuery.ajax({
                 'url':settings.api_mp,
                 'success':save_mp,
@@ -212,7 +212,7 @@ $js=<<<EOD
 
             if(ct==true){
                 _start_run();
-            }
+            };
         });
 
         var show_links=[];
@@ -233,8 +233,8 @@ $js=<<<EOD
                 }else{
                     m = Math.round((info.count/n)*10000)/100;
                 }
-            }
-            if(m>100){m=100;}
+            };
+            if(m>100){m=100;};
 
 //            alert(info.url_depth);
             if(coll_url.length==0&&info.count==1&&ct==false){
@@ -243,7 +243,7 @@ $js=<<<EOD
                 return;
             }else{
                 $("#info").html('').html('<div class="ih">发现链接:'+coll_url.length+'</div><div class="ib">已经爬行:'+info.count+'页('+m+'%)</div>');
-            }
+            };
             if(info.url_depth>1){
                 show_links.unshift(info.the_url);
                 show_links=show_links.slice(0,14);
@@ -289,7 +289,7 @@ $js=<<<EOD
                         info.the_url = true;
                     }
                 }
-            }
+            };
 //            alert(info.the_url+info.url_depth);
 //            coll_url.push(info.the_url);
             return info.the_url;
