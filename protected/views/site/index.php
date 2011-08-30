@@ -365,6 +365,7 @@ $js=<<<EOD
             return true;
         };
 
+/*
         var _trace = function (x, traceType) {
             var type = typeof(x), message = '';
 
@@ -421,7 +422,7 @@ $js=<<<EOD
                 return notice;
             };
         };
-
+*/
     };
 })(jQuery);
 
