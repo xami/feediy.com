@@ -65,7 +65,7 @@ $cs->registerScript('items', $packed, CClientScript::POS_END);
     line-height: 33px;
 }
     #info .ih{
-        margin-left: 50px;
+        clear: left;
         float: left;
         width: 180px;
     }
@@ -500,3 +500,5 @@ Array.prototype.distinct3 = function(sr){
 $('#st1').siteMap();
 /*]]>*/
 </script>
+
+
