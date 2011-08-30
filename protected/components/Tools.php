@@ -43,7 +43,9 @@ class Tools
 					'Result'=>$curl->getResult(),
 				);
 			}
-			$cache->set($key, $c, $expire);
+            if(sizeof($c)<1024*1024*5){
+                $cache->set($key, $c, $expire);
+            }
 		}
 		
 		if($show==true){
