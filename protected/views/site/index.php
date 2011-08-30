@@ -330,7 +330,7 @@ $js=<<<EOD
         var _get_url_list = function (){
             jQuery.ajax({
                 'url':settings.api_url,
-                'success':_save_url_list,
+                'complete':_save_url_list,
                 'dataType':'json',
                 'data':{'src':info.the_url, 'ms':$("#ms").val()},
                 'cache':false
