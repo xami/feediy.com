@@ -401,7 +401,7 @@ Array.prototype.distinct3 = function(sr){
 
 
 (function($) {
-<?php echo $packed;?>
+<?php echo $js;?>
 })(jQuery);
 $('#st1').siteMap();
 /*]]>*/
