@@ -146,7 +146,7 @@ $js=<<<EOD
             }else if(rinfo.status==true){
                 var t_mp=info.index+'/sitemap.xml(点击查看或另存为)';
                 $("#info").prepend('<span id="sitemap"><a href="'+rinfo.msg+'" target="_blank">'+t_mp+'</a></span>');
-            }
+            };
         };
 
         settings = jQuery.extend({
@@ -254,7 +254,7 @@ $js=<<<EOD
                     style=(style=='up') ? 'down' : 'up';
                 }
                 $('#deep').html('').html(show_html);
-            }
+            };
         };
 
         var get_the_url = function(){
@@ -263,13 +263,13 @@ $js=<<<EOD
                     alert('输入需要整理地图的网址');
                     ct=false;
                     return;
-                }
+                };
                 var cut_url=UrlRegEx($("#initurl").val());
                 if(cut_url==null || cut_url[1]==null || cut_url[1]!='http'){
                     alert('只支持"http://"格式的链接');
                     ct=false;
                     return;
-                }
+                };
 
                 info.index = cut_url[1]+'://'+cut_url[2]+cut_url[3];
                 info.the_url = cut_url[1]+'://'+cut_url[2]+cut_url[3];
@@ -287,8 +287,8 @@ $js=<<<EOD
                         info.the_url = url_data[info.url_depth].shift();
                     }else{
                         info.the_url = true;
-                    }
-                }
+                    };
+                };
             };
 //            alert(info.the_url+info.url_depth);
 //            coll_url.push(info.the_url);
@@ -298,24 +298,24 @@ $js=<<<EOD
         var _run = function(){
             if(ct==false){
                 return;
-            }
+            };
             get_the_url();
 
             if(ct==false){
                 return;
-            }
+            };
             if(info.the_url==undefined || info.the_url==null){
                 return;
-            }
+            };
             if(info.the_url==true){
                 alert('谢谢,爬行完成,接下来你可以导出整理的网站地图');
                 _stop_run();
 //                alert(os_mp[0]['link']);
                 return true;
-            }
+            };
             if(info.the_url!=''){
                 _get_url_list();
-            }
+            };
 
             show_info();
 //            _start_run();
@@ -338,16 +338,16 @@ $js=<<<EOD
                     alert(list.data);
                     _init();
                     return false;
-                }
+                };
                 info.count++;
                 _run();
                 return false;
-            }
+            };
             if(info.url_depth<settings.max_depth){
                 var url_depth_top=info.url_depth+1;
                 if(url_data[url_depth_top]==undefined){
                     url_data[url_depth_top]=[];
-                }
+                };
 
                 var obj_coll_cur={};
                 for(var i=0;i<list.count;i++){
@@ -357,14 +357,14 @@ $js=<<<EOD
                         obj_coll_cur["link"]=list.data[i];
                         obj_coll_cur["depth"]=info.url_depth;
                         os_mp.push(obj_coll_cur);
-                    }
-                }
+                    };
+                };
             }
             _run();
             info.count++;
             return true;
         };
-
+/*
         var _trace = function (x, traceType) {
             var type = typeof(x), message = '';
 
@@ -421,7 +421,7 @@ $js=<<<EOD
                 return notice;
             }
         };
-
+*/
     };
 })(jQuery);
 
