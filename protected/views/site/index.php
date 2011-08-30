@@ -364,7 +364,7 @@ $js=<<<EOD
             info.count++;
             return true;
         };
-/*
+
         var _trace = function (x, traceType) {
             var type = typeof(x), message = '';
 
@@ -375,53 +375,53 @@ $js=<<<EOD
                 default:
                     message = typeof(x) + ': ' + x + (traceType && traceType == 'alert' ? '\\n' : '<br>');
                     break;
-            }
+            };
 
             if (traceType && traceType == 'alert') {
                 alert(message)
             } else {
                 document.write(message)
-            }
+            };
 
             function traceObj(x, traceType) {
                 // 初始化对象属性
                 if (traceObj.tabNum === undefined) {
                     traceObj.tabNum = 0;
-                }
+                };
 
                 var notice = '';
                 if (traceType && traceType == 'alert') {
                     var tab = '\\t', br = '\\n';
                 } else {
                     var tab = '&nbsp;&nbsp;&nbsp;&nbsp;', br = '<br>';
-                }
+                };
 
                 notice += typeof(x) + br;
                 for (var t = 0; t <traceObj.tabNum; t++) {
                     notice += tab;
-                }
+                };
                 notice += '(' + br;
                 for (var i in x) {
                     for (var t = 0; t <= traceObj.tabNum; t++) {
                         notice += tab;
-                    }
+                    };
                     if (typeof(x[i]) == 'object') {
                         notice += '[' + i + '] => ';
                         traceObj.tabNum++; // 增加缩进
                         notice += traceObj(x[i], traceType);
                         traceObj.tabNum--; // 减少缩进
                     } else {
-                        notice += '[' + i + ']' + ' => ' + typeof(x[i]) + ': ' + x[i] + br;
-                    }
-                }
+                        notice += '[' + i + ']' + ' => ' + typeof(x[i]) + ':' + x[i] + br;
+                    };
+                };
                 for (var t = 0; t <traceObj.tabNum; t++) {
                     notice += tab;
-                }
+                };
                 notice += ')' + br;
                 return notice;
-            }
+            };
         };
-*/
+
     };
 })(jQuery);
 
@@ -504,7 +504,7 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 <div id="info"><div class="ih">请输入目标网站的域名，需要带http://</div></div>
 
 <div id="box">
-    <input class="ibox" type="text" value="http://sitemap.feediy.com" size="59" name="initurl" id="initurl" />
+    <input class="ibox" type="text" value="http://sitemap.feediy.com" size="56" name="initurl" id="initurl" />
     <input class="but" type="button" value="分析" id="st1" />
     <input class="but" style="display: none;" type="button" value="生成网站地图" id="do_create_mp" />
     <a id="bre" href="http://www.feediy.com"><span class="rr">重新整理</span></a>
