@@ -453,7 +453,7 @@ $packed_f = $packer_f->pack();
 .four{background:url(/images/circular-4.gif) top left no-repeat;padding-left:30px;padding-bottom:5px;}
 .ibox{background:none repeat scroll 0 0 #E5ECF9;border:2px solid #CCCCCC;font:14px "Trebuchet MS","Helvetica",sans-serif;padding:4px;height:19px;}
 .but{background:url("/images/but.gif") repeat-x scroll 50% top #CDE4F2;border:1px solid #C5E2F2;cursor:pointer;height:30px;margin-left:5px;}
-#info{font-size:14px;font-weight:bold;line-height:33px;}#info .ih{clear:left;float:left;}
+#info{font-size:14px;font-weight:bold;line-height:30px;}#info .ih{clear:left;float:left;}
 #info .ib{float:left;width:180px;}#deep{clear:both;}.nots{width:570px;float: left;} #cl{clear:both;height: 15px;}
 #deep .up{border-bottom:1px solid #AAC1DE;background-color:#C1D9F3;padding:6px 7px 4px;}
 #deep .down{background-color:#F2F4F6;border-bottom:1px solid #C1C8D2;padding:6px 7px 4px;}
