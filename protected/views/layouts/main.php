@@ -29,7 +29,7 @@
 		<?php $this->widget('zii.widgets.CMenu',array(
 			'items'=>array(
 				array('label'=>'首页', 'url'=>'/'),
-				array('label'=>'关于', 'url'=>array('/site/page', 'view'=>'about')),
+				array('label'=>'网站地图生成工具', 'url'=>array('/site/page', 'view'=>'about')),
 				array('label'=>'联系', 'url'=>array('/site/contact')),
 //				array('label'=>'登陆', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 //				array('label'=>'退出 ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
@@ -45,7 +45,7 @@
 	<?php echo $content; ?>
 
 	<div id="footer">
-		Copyright &copy; <?php echo date('Y'); ?> By <a href="http://www.feediy.com">www.feediy.com</a>
+		Copyright &copy; <?php echo date('Y'); ?> By <a href="http://www.feediy.com">www.feediy.com</a>&nbsp;&nbsp;<a href="http://sitemap.feediy.com">sitemap.feediy.com</a>
 	</div><!-- footer -->
 
 </div><!-- page -->

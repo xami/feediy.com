@@ -139,12 +139,23 @@ class ToolController extends Controller
             echo json_encode(array('status'=>500,'data'=>'输入需要整理地图的网址'));
             die;
         }
+        if(strpos($src, 'http://')!==0){
+            echo json_encode(array('status'=>500,'data'=>'连接开头需要加"http://"'));
+            die;
+        }
         if(!Tools::is_url($src)){
             echo json_encode(array('status'=>500,'data'=>'输入正确的网址'));
             die;
         }
-        
-        $page=Tools::OZCurl($src, $expire);
+
+
+        try{
+            $page=Tools::OZCurl($src, $expire);
+        }catch(Exception $e){
+            echo json_encode(array('status'=>500,'data'=>$e->getMessage()));
+            die;
+        }
+
 
         if(empty($page)){
             echo json_encode(array('status'=>500,'data'=>''));
@@ -261,6 +272,9 @@ class ToolController extends Controller
             $ct_link=array();
             if(!empty($links_full)){
                 foreach($links_full as $the_link){
+//                    if((strlen($the_link)-1)==strrpos($the_link,'/')){
+//                        $the_link=substr($the_link,0,-1);
+//                    }
                     $ct_link[]=html_entity_decode($the_link);
                 }
             }
