@@ -316,9 +316,10 @@ class ToolController extends Controller
             if(isset($mp[$i]) && !empty($mp[$i])){
                 $priority=1.0-(0.2*$i);
                 foreach($mp[$i] as  $link){
+                    
                     $xml_body.=
 '<url>'."\r\n".
-'    <loc>'.htmlentities($link).'</loc>'."\r\n".
+'    <loc>'.trim($link).'</loc>'."\r\n".
 '    <changefreq>hourly</changefreq>'."\r\n".
 '    <priority>'.$priority.'</priority>'."\r\n".
 '</url>'."\r\n";
