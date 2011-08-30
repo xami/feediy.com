@@ -115,12 +115,14 @@ $js=<<<EOD
         var info={};
         var os_mp=[];
         var ct=true;
+        var dm='';
 
 
         var _start_run = function(){
             $("#st1").attr({"disabled":"disabled"});
             $("#do_create_mp").show();
             $("#bre").show();
+            $("#initurl").attr({"readonly":"readonly"});
         };
 
         var _stop_run = function(){
@@ -135,6 +137,7 @@ $js=<<<EOD
             info={};
             info.the_url='';
             info.url_depth=0;
+            dm='';
         };
 
         var save_mp = function(rinfo){
@@ -160,6 +163,8 @@ $js=<<<EOD
             for(var i=0;i<os_mp.length;i++){
                 mp_data+='mp['+os_mp[i]['depth']+'][]='+os_mp[i]['link']+'&';
             };
+            mp_data+='dm='+dm;
+            
             jQuery.ajax({
                 'url':settings.api_mp,
                 'success':save_mp,
@@ -271,6 +276,7 @@ $js=<<<EOD
                     return;
                 };
 
+                dm=cut_url[2]+cut_url[3];
                 info.index = cut_url[1]+'://'+cut_url[2]+cut_url[3];
                 info.the_url = cut_url[1]+'://'+cut_url[2]+cut_url[3];
 
