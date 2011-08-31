@@ -127,6 +127,7 @@ $js=<<<EOD
 
         var _stop_run = function(){
             $("#st1").removeAttr("disabled");
+            $("#do_create_mp").removeAttr("disabled");
         };
         _stop_run();
 
