@@ -31,7 +31,7 @@
 				array('label'=>'首页', 'url'=>'/'),
 				array('label'=>'网站地图生成工具使用说明', 'url'=>array('/site/page', 'view'=>'about')),
 				array('label'=>'问题意见反馈', 'url'=>array('/site/contact')),
-                array('label'=>'网站地图结果缓存', 'url'=>'http://sitemap.feediy.com', 'target'=>'_blank'),
+                array('label'=>'网站地图结果缓存', 'url'=>'http://sitemap.feediy.com', array('target'=>'_blank')),
 //				array('label'=>'登陆', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 //				array('label'=>'退出 ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 			),
