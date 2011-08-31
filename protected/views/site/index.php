@@ -1,7 +1,7 @@
 <?php $this->pageTitle=Yii::app()->name;
 $cs=Yii::app()->clientScript;
 $cs->registerCoreScript('jquery');
-Yii::app()->clientScript->registerMetaTag('网站地图,FEEDIY SITEMAP Generator,FEEDIY网站地图在线生成工具,sitemap.xml,sitemap,seo tools,Free Online Sitemap Generator,www.feediy.com,http://www.feediy.com,feediy', 'keywords');
+Yii::app()->clientScript->registerMetaTag('网站地图,FEEDIY SITEMAP Generator,FEEDIY网站地图在线生成工具,sitemap.xml,sitemap,seo tools,Free Online Sitemap Generator,create sitemap,make sitemap,new sitemap,www.feediy.com,http://www.feediy.com,feediy', 'keywords');
 Yii::app()->clientScript->registerMetaTag('感谢您的使用,好用请帮忙推荐!FEEDIY网站地图在线生成工具,完全免费,没有页面数量限制,模拟网络蜘蛛自动整理网站地图,让你的网页内容更快的被搜索引擎baidu.com,google.com,yahoo.com收录,http://www.feediy.com', 'description');
 $js_f=<<<EOD
 /*
@@ -469,7 +469,7 @@ $packed_f = $packer_f->pack();
 #bre .rr{color: black;font-size: 14px;} #do_create_mp{color: red;}
 </style>
 
-<h1>FEEDIY网站地图自动生成工具(免费),Free Online Sitemap Generator<a id="reload" href="http://www.feediy.com"><span class="rr">重新整理</span></a></h1>
+<h1>FEEDIY网站地图自动生成工具,Free Online Sitemap Generator<a id="reload" href="http://www.feediy.com"><span class="rr">重新整理</span></a></h1>
 
 <div class="nots">
 <div id="msg">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;请知晓下面的事项,本工具会自动爬行整理3层逻辑深度,整理出的网站地图内容系"FEEDIY网站地图自动生成工具"根据您的指令自动整理的结果,不代表<a href="http://www.feediy.com">FEEDIY.COM</a>赞成被整理网站的内容或立场.
