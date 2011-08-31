@@ -157,7 +157,7 @@ $js=<<<EOD
 
         $("#do_create_mp").click(function (){
             $("#do_create_mp").val('请稍等，数据分析中。。。').attr({"disabled":"disabled"});
-
+            ct=false;
             var mp_data='';
             for(var i=0;i<os_mp.length;i++){
                 mp_data+='mp['+os_mp[i]['depth']+'][]='+os_mp[i]['link']+'&';
