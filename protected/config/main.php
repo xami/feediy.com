@@ -7,7 +7,7 @@
 // CWebApplication properties can be configured here.
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'FEEDIY TOOLS :: Free Online Sitemap Generator',
+	'name'=>'SITEMAP TOOLS :: Free Online Sitemap Generator',
 
 	// preloading 'log' component
 	'preload'=>array('log'),
