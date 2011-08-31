@@ -45,7 +45,7 @@
 	<?php echo $content; ?>
 
 	<div id="footer">
-		Copyright &copy; <?php echo date('Y'); ?> By <a href="http://www.feediy.com">www.feediy.com</a>&nbsp;&nbsp;<a href="http://sitemap.feediy.com">sitemap.feediy.com(网站支持列表)</a><br />
+		站长QQ: 448 1195&nbsp;&nbsp;Copyright &copy; <?php echo date('Y'); ?> By <a href="http://www.feediy.com">www.feediy.com</a>&nbsp;&nbsp;<a href="http://sitemap.feediy.com">sitemap.feediy.com(网站支持列表)</a><br />
         友情链接:&nbsp;&nbsp;
         <a href="http://www.orzero.com">或零</a>&nbsp;-&nbsp;
         <a href="http://www.orzero.net">或零日志</a>&nbsp;-&nbsp;
