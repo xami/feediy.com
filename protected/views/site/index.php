@@ -468,7 +468,7 @@ $packed_f = $packer_f->pack();
 #bre .rr{color: black;font-size: 14px;} #do_create_mp{color: red;}
 </style>
 
-<h1>飞度网站地图自动生成工具(免费),Free Online Sitemap Generator<a id="reload" href="http://www.feediy.com"><span class="rr">重新整理</span></a></h1>
+<h1>FEEDIY网站地图自动生成工具(免费),Free Online Sitemap Generator<a id="reload" href="http://www.feediy.com"><span class="rr">重新整理</span></a></h1>
 
 <div class="nots">
 <div id="msg">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;请知晓下面的事项,本工具会自动爬行整理3层逻辑深度,整理出的网站地图内容系"飞度网站地图自动生成工具"根据您的指令自动整理的结果,不代表<a href="http://www.feediy.com">FEEDIY.COM</a>赞成被整理网站的内容或立场.

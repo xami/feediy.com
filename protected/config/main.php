@@ -7,7 +7,7 @@
 // CWebApplication properties can be configured here.
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'feediy tools::网站地图sitemap.xml在线生成工具',
+	'name'=>'FEEDIY TOOLS :: 网站地图在线生成工具,Free Online Sitemap Generator,Create web sitemap.xml',
 
 	// preloading 'log' component
 	'preload'=>array('log'),
