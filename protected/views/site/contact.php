@@ -5,7 +5,7 @@ $this->breadcrumbs=array(
 );
 ?>
 
-<h1>Contact Us</h1>
+<h1>联系站长</h1>
 
 <?php if(Yii::app()->user->hasFlash('contact')): ?>
 
@@ -16,7 +16,7 @@ $this->breadcrumbs=array(
 <?php else: ?>
 
 <p>
-If you have business inquiries or other questions, please fill out the following form to contact us. Thank you.
+在使用过程中有任何问题可以直接通过下面的列表在线发消息给站长，或者加站长QQ： 448 1195 沟通。同时欢迎给出您的宝贵意见或者其它改进的想法，谢谢！.
 </p>
 
 <div class="form">
