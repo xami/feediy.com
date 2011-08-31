@@ -469,7 +469,7 @@ $packed_f = $packer_f->pack();
 #bre .rr{color: black;font-size: 14px;} #do_create_mp{color: red;}
 </style>
 
-<h1>FEEDIY SITEMAP 网站地图自动生成工具,Free Online Sitemap Generator<a id="reload" href="http://www.feediy.com"><span class="rr">_</span></a></h1>
+<h1><a id="reload" href="http://www.feediy.com">FEEDIY SITEMAP 网站地图自动生成工具,Free Online Sitemap Generator</a></h1>
 
 <div class="nots">
 <div id="msg">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本工具会自动爬行整理3层逻辑深度,整理出的网站地图内容系"FEEDIY网站地图自动生成工具"根据您的指令自动整理的结果,不代表<a href="http://www.feediy.com">FEEDIY.COM</a>赞成被整理网站的内容或立场.
