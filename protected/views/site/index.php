@@ -1,7 +1,8 @@
 <?php $this->pageTitle=Yii::app()->name;
 $cs=Yii::app()->clientScript;
 $cs->registerCoreScript('jquery');
-
+Yii::app()->clientScript->registerMetaTag('网站地图,FEEDIY SITEMAP Generator,FEEDIY网站地图在线生成工具,sitemap.xml,sitemap,seo tools,Free Online Sitemap Generator,www.feediy.com,http://www.feediy.com,feediy', 'keywords');
+Yii::app()->clientScript->registerMetaTag('感谢您的使用,好用请帮忙推荐!FEEDIY网站地图在线生成工具,完全免费,没有页面数量限制,模拟网络蜘蛛自动整理网站地图,让你的网页内容更快的被搜索引擎baidu.com,google.com,yahoo.com收录,http://www.feediy.com', 'description');
 $js_f=<<<EOD
 /*
 Array.prototype.distinct1 = function(){
@@ -471,7 +472,7 @@ $packed_f = $packer_f->pack();
 <h1>FEEDIY网站地图自动生成工具(免费),Free Online Sitemap Generator<a id="reload" href="http://www.feediy.com"><span class="rr">重新整理</span></a></h1>
 
 <div class="nots">
-<div id="msg">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;请知晓下面的事项,本工具会自动爬行整理3层逻辑深度,整理出的网站地图内容系"飞度网站地图自动生成工具"根据您的指令自动整理的结果,不代表<a href="http://www.feediy.com">FEEDIY.COM</a>赞成被整理网站的内容或立场.
+<div id="msg">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;请知晓下面的事项,本工具会自动爬行整理3层逻辑深度,整理出的网站地图内容系"FEEDIY网站地图自动生成工具"根据您的指令自动整理的结果,不代表<a href="http://www.feediy.com">FEEDIY.COM</a>赞成被整理网站的内容或立场.
 <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;欢迎反馈使用中遇到的问题,请点上面的联系,在线发邮件给站长.</div>
 <div class="one">网站地图生成工具,适用于baidu,google等搜索引擎的自动收录,可以自由分发整理的网站地图结果,请保留本站的链接以及保证内容的完整性;</div>
 <div class="two">程序按页面逻辑深度顺序搜集当前网站包含的链接,只识别正常的html链接,忽略js生成的跳转代码以及文本形式的链接,忽略其他域名的链接,不检查链接的状态,只要发现的页面有包含即加入网站地图列表;</div>
