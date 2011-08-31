@@ -76,8 +76,15 @@ return array(
 			),
 		),
         'cache'=>array(
-			'class'=>'CFileCache',
-		),
+            'class'=>'CMemCache',
+                'servers'=>array(
+                    array(
+                        'host'=>'127.0.0.1',
+                        'port'=>11211,
+                        'weight'=>100,
+                    ),
+            ),
+        ),
 		'CURL' =>array(
 			'class' => 'application.extensions.Curl',
 		),
