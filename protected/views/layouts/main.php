@@ -45,7 +45,17 @@
 	<?php echo $content; ?>
 
 	<div id="footer">
-		Copyright &copy; <?php echo date('Y'); ?> By <a href="http://www.feediy.com">www.feediy.com</a>&nbsp;&nbsp;<a href="http://sitemap.feediy.com">sitemap.feediy.com</a>
+		Copyright &copy; <?php echo date('Y'); ?> By <a href="http://www.feediy.com">www.feediy.com</a>&nbsp;&nbsp;<a href="http://sitemap.feediy.com">sitemap.feediy.com(网站支持列表)</a><br />
+        友情链接:&nbsp;&nbsp;
+        <a href="http://www.orzero.com">或零</a>&nbsp;-&nbsp;
+        <a href="http://www.orzero.net">或零日志</a>&nbsp;-&nbsp;
+        <a href="http://www.xxer.info">新客</a>&nbsp;-&nbsp;
+        <a href="http://avup.info">AVUP</a>&nbsp;-&nbsp;
+        <a href="http://www.odube.com">odube.com</a>&nbsp;-&nbsp;
+        <a href="http://www.haoselang.com">HaoSeLang</a>&nbsp;-&nbsp;
+        <a href="http://www.snlg.info">SNLG</a>&nbsp;-&nbsp;
+        <a href="http://www.yardown.com">yardown.com</a>&nbsp;-&nbsp;
+        <a href="http://www.mtianya.com">M天涯</a>&nbsp;-&nbsp;
 	</div><!-- footer -->
 
 </div><!-- page -->

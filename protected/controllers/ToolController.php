@@ -147,7 +147,7 @@ class ToolController extends Controller
             echo json_encode(array('status'=>500,'data'=>'输入正确的网址'));
             die;
         }
-
+        
 
         try{
             $page=Tools::OZCurl($src, $expire);
@@ -295,10 +295,12 @@ class ToolController extends Controller
     {
 //        pd($_REQUEST);
         $mp=Yii::app()->request->getParam('mp', array());
+        $dm=Yii::app()->request->getParam('dm', 'feediy.com');
         if(empty($mp)){
             echo json_encode(array('status'=>false,'msg'=>'内容为空'));
             die;
         }
+
 
         $xml_head='<?xml version="1.0" encoding="UTF-8"?>
 <urlset
@@ -314,9 +316,10 @@ class ToolController extends Controller
             if(isset($mp[$i]) && !empty($mp[$i])){
                 $priority=1.0-(0.2*$i);
                 foreach($mp[$i] as  $link){
+                    
                     $xml_body.=
 '<url>'."\r\n".
-'    <loc>'.htmlentities($link).'</loc>'."\r\n".
+'    <loc>'.trim($link).'</loc>'."\r\n".
 '    <changefreq>hourly</changefreq>'."\r\n".
 '    <priority>'.$priority.'</priority>'."\r\n".
 '</url>'."\r\n";
@@ -327,10 +330,10 @@ class ToolController extends Controller
         $xml_foot='</urlset>';
 
         $time=time();
-        $sitemap_file=Yii::app()->basePath.DIRECTORY_SEPARATOR.'sitemap'.DIRECTORY_SEPARATOR.'feediy.com_'.$time.'.xml';
+        $sitemap_file=Yii::app()->basePath.DIRECTORY_SEPARATOR.'sitemap'.DIRECTORY_SEPARATOR.$dm.'_'.$time.'.xml';
         file_put_contents($sitemap_file, $xml_head.$xml_body.$xml_foot);
 
-        echo json_encode(array('status'=>true,'msg'=>'http://sitemap.feediy.com/feediy.com_'.$time.'.xml'));
+        echo json_encode(array('status'=>true,'msg'=>'http://sitemap.feediy.com/'.$dm.'_'.$time.'.xml'));
     }
 
     public function actionTest()
