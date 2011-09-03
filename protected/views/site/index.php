@@ -309,6 +309,7 @@ $js=<<<EOD
                 db += os_mp[i]['depth'] +' : '+os_mp[i]['link'] +'<br />';
             }
             $("#db").html('').html(db);
+            alert(db);
             
             _run();
             info.count++;
