@@ -63,6 +63,20 @@ function UrlRegEx(url)
 	return arr;
 }
 
+function get_suffix(url)
+{
+    if(url==''){
+        return false;
+    }
+    var re = /\\.([a-z]{3,4})$/i;
+    var suffix = url.match(re);
+    if(suffix!=null && suffix[1]!=undefined){
+        return suffix[1];
+    }else{
+        return false;
+    }
+}
+
 EOD;
 
 $js=<<<EOD
@@ -113,6 +127,11 @@ $js=<<<EOD
 
         settings = jQuery.extend({
             max_depth: 3
+            , file_type: ['zip','gzip','gz','rar','jpg','gif','bmp','iso','txt','js','css',
+                'jpeg','png','jng','svg','jar','doc','pdf','ppt','7z','swf','xpi',
+                'bin','exe','dll','img','mp3','mid','midi','ogg','mpeg','mpg','mov',
+                'rm','flv','asx','asf','wmv','avi','rpm','mng','ra','xls','rtf',
+                'wbmp','jad','ico','chm','rmvb','td','mp4','msi']
             , api_url: '/tool/getlinks'
             , api_mp: '/tool/create_mp'
         },settings || {});
@@ -239,6 +258,12 @@ $js=<<<EOD
             if(info.the_url==undefined || info.the_url==null){
                 return;
             };
+
+            if(in_array(get_suffix(info.the_url),settings.file_type)){
+                _run();
+                return;
+            };
+
             if(info.the_url==true){
                 alert('谢谢,爬行完成,接下来你可以导出整理的网站地图');
                 _stop_run();
@@ -289,9 +314,11 @@ $js=<<<EOD
                         coll_url.push(list.data[i]);
 
                         obj_coll_cur={};
-                        obj_coll_cur.link=list.data[i];
-                        obj_coll_cur.depth=info.url_depth;
-                        os_mp.push(obj_coll_cur);
+                        if(!in_array(get_suffix(list.data[i]),settings.file_type)){
+                            obj_coll_cur.link=list.data[i];
+                            obj_coll_cur.depth=info.url_depth;
+                            os_mp.push(obj_coll_cur);
+                        }
                     };
                 };
             }else{
@@ -300,9 +327,11 @@ $js=<<<EOD
                         coll_url.push(list.data[i]);
 
                         obj_coll_cur={};
-                        obj_coll_cur.link=list.data[i];
-                        obj_coll_cur.depth=info.url_depth;
-                        os_mp.push(obj_coll_cur);
+                        if(!in_array(get_suffix(list.data[i]),settings.file_type)){
+                            obj_coll_cur.link=list.data[i];
+                            obj_coll_cur.depth=info.url_depth;
+                            os_mp.push(obj_coll_cur);
+                        }
                     };
                 };
             }
