@@ -274,13 +274,14 @@ $js=<<<EOD
                 _run();
                 return false;
             };
+            var obj_coll_cur={};
             if(info.url_depth<settings.max_depth){
                 var url_depth_top=info.url_depth+1;
                 if(url_data[url_depth_top]==undefined){
                     url_data[url_depth_top]=[];
                 };
 
-                var obj_coll_cur={};
+
                 for(var i=0;i<list.count;i++){
                     if(!in_array(list.data[i],coll_url)){
                         url_data[url_depth_top].push(list.data[i]);
@@ -408,7 +409,7 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 /*<![CDATA[*/
 <?php echo $packed_f;?>
 
-<?php echo $packed;?>
+<?php echo $js;?>
 
 /*]]>*/
 </script>
