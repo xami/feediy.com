@@ -308,7 +308,7 @@ $js=<<<EOD
             for(var i=0;i<os_mp.count;i++){
                 db += os_mp[i]['depth'] +' : '+os_mp[i]['link'] +'<br />';
             }
-            $("#debug").html('').html(db);
+            $("#db").html('').html(db);
             
             _run();
             info.count++;
@@ -412,7 +412,7 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 
 <div id="xml"></div>
 
-<div id="debug"></div>
+<div id="db"></div>
 
 <script type="text/javascript">
 /*<![CDATA[*/
