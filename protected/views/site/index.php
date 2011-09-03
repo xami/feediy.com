@@ -409,7 +409,7 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 /*<![CDATA[*/
 <?php echo $packed_f;?>
 
-<?php echo $js;?>
+<?php echo $packed;?>
 
 /*]]>*/
 </script>
