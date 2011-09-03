@@ -315,7 +315,7 @@ class ToolController extends Controller
         for($i=1;$i<=3;$i++){
             if(isset($mp[$i]) && !empty($mp[$i])){
                 $priority=1.0-(0.2*$i);
-                foreach($mp[$i] as  $link){
+                foreach(array_unique($mp[$i]) as  $link){
                     
                     $xml_body.=
 '<url>'."\r\n".
