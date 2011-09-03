@@ -4,6 +4,34 @@ $cs->registerCoreScript('jquery');
 Yii::app()->clientScript->registerMetaTag('Sitemap Online Tools,网站地图,FEEDIY SITEMAP Generator,FEEDIY网站地图在线生成工具,sitemap.xml,sitemap,seo tools,Free Online Sitemap Generator,create sitemap,make sitemap,new sitemap,www.feediy.com,http://www.feediy.com,feediy', 'keywords');
 Yii::app()->clientScript->registerMetaTag('感谢您的使用FEEDIY SITEMAP Generator,好用请帮忙推荐!FEEDIY网站地图在线生成工具,完全免费,没有页面数量限制,模拟网络蜘蛛自动整理网站地图,让你的网页内容更快的被搜索引擎baidu.com,google.com,yahoo.com收录,http://www.feediy.com', 'description');
 $js_f=<<<EOD
+/*
+Array.prototype.distinct1 = function(){
+    //需要考虑数组内容中包含boolean,string类型数据。
+    var newArray=[] , provisionalTable = {};
+    for (var i = 0, item; (item= this[i]) != null; i++) {
+        if (!provisionalTable[item] && item != "") {
+             newArray.push(item);
+             provisionalTable[item] = true;
+         }
+     }
+    return newArray;
+};
+
+Array.prototype.distinct2 = function(){
+var b=[];
+var obj={};
+for(var i=0;i<this.length;i++){
+    obj[this[i]]=this[i];
+}
+for(var a in obj){
+    if(obj[a]!=false){
+        b.push(obj[a]);
+    }
+}
+return b;
+};
+*/
+
 function    HTMLEnCode(str)
 {
      var    s    =    "";
@@ -63,6 +91,21 @@ function UrlRegEx(url)
 	return arr;
 }
 
+/*
+Array.prototype.distinct3 = function(sr){
+    //需要考虑数组内容中包含boolean,string类型数据。
+    var newArray=[] , provisionalTable = {};
+    for (var i = 0, item; (item= this[i]) != null; i++) {
+        if (!provisionalTable[item] && item != "") {
+            if(!in_array(item,sr)){
+                newArray.push(item);
+            }
+            provisionalTable[item] = true;
+         }
+     }
+    return newArray;
+};
+*/
 EOD;
 
 $js=<<<EOD
@@ -135,11 +178,43 @@ $js=<<<EOD
                 'cache':false
             });
 
+/*
+            var xml_head='<?xml version="1.0" encoding="UTF-8"?>'+"\\n"+'\\
+<urlset '+"\\n"+'\\
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '+"\\n"+'\\
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" '+"\\n"+'\\
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 '+"\\n"+'\\
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">'+"\\n"+'\\
+<!-- created with Free Online Sitemap Generator www.feediy.com -->'+"\\n\\n"+'\\
+';
 
+            var xml_body='';
+            var priority=new Number();
+            for(var i=0;i<os_mp.length;i++){
+                priority=1.0-(os_mp[i]['depth']*0.2);
+                xml_body+=
+'<url>'+"\\n"+'\\
+    <loc>'+encodeURI(os_mp[i]['link'])+'</loc>'+"\\n"+'\\
+    <changefreq>hourly</changefreq>'+"\\n"+'\\
+    <priority>'+priority+'</priority>'+"\\n"+'\\
+</url>'+"\\n"+'\\
+';
+            }
+
+            var xml_footer='</urlset>';
+
+            $("#xml").html(HTMLEnCode(xml_head+xml_body+xml_footer));
+*/
         });
 
         this.click(function (){
-
+//            var a = [1,323,'ada','3',3,'4','bb',''];
+//            var b = ['323','3','bb','','ss','5t'];
+//            alert(b.distinct3(a));
+//            document.write(a, ' <br/> ');
+//            document.write(a.unquie(), ' <br/> ');
+//            _trace(info.the_url, 'alert');
+//            _trace(UrlRegEx('http://www.baidu.com/ss')[2], 'alert');
             _init();
 
             _run();
@@ -170,6 +245,7 @@ $js=<<<EOD
             };
             if(m>100){m=100;};
 
+//            alert(info.url_depth);
             if(coll_url.length==0&&info.count==1&&ct==false){
                 $("#info").html('').html('<div class="ih">请确认当前域名可以访问,或者首页连接数不为空</div>');
                 ct=false;
@@ -224,6 +300,8 @@ $js=<<<EOD
                     };
                 };
             };
+//            alert(info.the_url+info.url_depth);
+//            coll_url.push(info.the_url);
             return info.the_url;
         };
 
@@ -242,6 +320,7 @@ $js=<<<EOD
             if(info.the_url==true){
                 alert('谢谢,爬行完成,接下来你可以导出整理的网站地图');
                 _stop_run();
+//                alert(os_mp[0]['link']);
                 return true;
             };
             if(info.the_url!=''){
@@ -249,6 +328,7 @@ $js=<<<EOD
             };
 
             show_info();
+//            _start_run();
         };
 
         var _get_url_list = function (){
@@ -285,28 +365,75 @@ $js=<<<EOD
                     if(!in_array(list.data[i],coll_url)){
                         url_data[url_depth_top].push(list.data[i]);
                         coll_url.push(list.data[i]);
-
                         obj_coll_cur["link"]=list.data[i];
                         obj_coll_cur["depth"]=info.url_depth;
                         os_mp.push(obj_coll_cur);
                     };
                 };
-            }else{
-                for(var i=0;i<list.count;i++){
-                    obj_coll_cur["link"]=list.data[i];
-                    obj_coll_cur["depth"]=info.url_depth;
-                    if(!in_array(obj_coll_cur,os_mp)){
-                        os_mp.push(obj_coll_cur);
-                    }
-                };
             }
-
-            
             _run();
             info.count++;
             return true;
         };
 
+/*
+        var _trace = function (x, traceType) {
+            var type = typeof(x), message = '';
+
+            switch (type) {
+                case 'object':
+                    message = traceObj(x, traceType);
+                    break;
+                default:
+                    message = typeof(x) + ': ' + x + (traceType && traceType == 'alert' ? '\\n' : '<br>');
+                    break;
+            };
+
+            if (traceType && traceType == 'alert') {
+                alert(message)
+            } else {
+                document.write(message)
+            };
+
+            function traceObj(x, traceType) {
+                // 初始化对象属性
+                if (traceObj.tabNum === undefined) {
+                    traceObj.tabNum = 0;
+                };
+
+                var notice = '';
+                if (traceType && traceType == 'alert') {
+                    var tab = '\\t', br = '\\n';
+                } else {
+                    var tab = '&nbsp;&nbsp;&nbsp;&nbsp;', br = '<br>';
+                };
+
+                notice += typeof(x) + br;
+                for (var t = 0; t <traceObj.tabNum; t++) {
+                    notice += tab;
+                };
+                notice += '(' + br;
+                for (var i in x) {
+                    for (var t = 0; t <= traceObj.tabNum; t++) {
+                        notice += tab;
+                    };
+                    if (typeof(x[i]) == 'object') {
+                        notice += '[' + i + '] => ';
+                        traceObj.tabNum++; // 增加缩进
+                        notice += traceObj(x[i], traceType);
+                        traceObj.tabNum--; // 减少缩进
+                    } else {
+                        notice += '[' + i + ']' + ' => ' + typeof(x[i]) + ':' + x[i] + br;
+                    };
+                };
+                for (var t = 0; t <traceObj.tabNum; t++) {
+                    notice += tab;
+                };
+                notice += ')' + br;
+                return notice;
+            };
+        };
+*/
     };
 })(jQuery);
 
