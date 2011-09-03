@@ -285,8 +285,8 @@ $js=<<<EOD
                 for(var i=0;i<list.count;i++){
                     if(!in_array(list.data[i],coll_url)){
                         url_data[url_depth_top].push(list.data[i]);
-                        coll_url.push(list.data[i]);
 
+                        coll_url.push(list.data[i]);
                         obj_coll_cur["link"]=list.data[i];
                         obj_coll_cur["depth"]=info.url_depth;
                         os_mp.push(obj_coll_cur);
@@ -294,11 +294,12 @@ $js=<<<EOD
                 };
             }else{
                 for(var i=0;i<list.count;i++){
-                    obj_coll_cur["link"]=list.data[i];
-                    obj_coll_cur["depth"]=info.url_depth;
-                    if(!in_array(obj_coll_cur,os_mp)){
+                    if(!in_array(list.data[i],coll_url)){
+                        coll_url.push(list.data[i]);
+                        obj_coll_cur["link"]=list.data[i];
+                        obj_coll_cur["depth"]=info.url_depth;
                         os_mp.push(obj_coll_cur);
-                    }
+                    };
                 };
             }
 
