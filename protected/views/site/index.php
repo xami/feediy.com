@@ -274,6 +274,7 @@ $js=<<<EOD
                 _run();
                 return false;
             };
+            alert(list.data);
             var obj_coll_cur={};
             if(info.url_depth<settings.max_depth){
                 var url_depth_top=info.url_depth+1;
