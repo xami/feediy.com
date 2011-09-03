@@ -265,6 +265,7 @@ class ToolController extends Controller
                 if(Tools::is_url($link_tmp)){
                     $links_full[]=$link_tmp;
                 }
+
 //                pd($links_full);
             }
             $links_full=array_unique($links_full);
@@ -289,6 +290,16 @@ class ToolController extends Controller
             flush();
         }
 
+    }
+
+
+    public function get_suffix($link_str)
+    {
+        if(empty($link_str)){
+            return false;
+        }
+        preg_match('/\.([a-z]{3,4})$/i', $link_str, $suffix);
+        return $suffix[1];
     }
 
     public function actionCreate_mp()
@@ -347,10 +358,12 @@ class ToolController extends Controller
 //        $mystring = 'abc';
 //        $findme   = 'a';
 //        echo $pos = strpos($mystring, $findme);
-        $content='xasdfax adsfax xcv';
-        $start='/c/';
-        $r = preg_split($start, $content, 2, PREG_SPLIT_OFFSET_CAPTURE);
-        pr($r);
+//        $content='xasdfax adsfax xcv';
+//        $start='/c/';
+//        $r = preg_split($start, $content, 2, PREG_SPLIT_OFFSET_CAPTURE);
+//        pr($r);
+        $url='.sdfs.Html';
+        pr($this->get_suffix($url));
 	}
 	
 
