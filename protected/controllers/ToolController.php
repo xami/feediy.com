@@ -300,6 +300,8 @@ class ToolController extends Controller
             echo json_encode(array('status'=>false,'msg'=>'内容为空'));
             die;
         }
+//        pr(count($mp[1]).'|'.count($mp[2]).'|'.count($mp[3]));
+//        pd($mp);
 
         $xml_head='<?xml version="1.0" encoding="UTF-8"?>
 <urlset

@@ -122,7 +122,7 @@ $js=<<<EOD
             ct=false;
             var mp_data='';
             for(var i=0;i<os_mp.length;i++){
-                mp_data+='mp['+os_mp[i]['depth']+'][]='+os_mp[i]['link']+'&';
+                mp_data+='mp['+os_mp[i].depth+'][]='+os_mp[i].link+'&';
             };
             mp_data+='dm='+dm;
             
@@ -282,14 +282,15 @@ $js=<<<EOD
                     url_data[url_depth_top]=[];
                 };
 
-
+            
                 for(var i=0;i<list.count;i++){
                     if(!in_array(list.data[i],coll_url)){
                         url_data[url_depth_top].push(list.data[i]);
-
                         coll_url.push(list.data[i]);
-                        obj_coll_cur["link"]=list.data[i];
-                        obj_coll_cur["depth"]=info.url_depth;
+
+                        obj_coll_cur={};
+                        obj_coll_cur.link=list.data[i];
+                        obj_coll_cur.depth=info.url_depth;
                         os_mp.push(obj_coll_cur);
                     };
                 };
@@ -297,20 +298,22 @@ $js=<<<EOD
                 for(var i=0;i<list.count;i++){
                     if(!in_array(list.data[i],coll_url)){
                         coll_url.push(list.data[i]);
-                        obj_coll_cur["link"]=list.data[i];
-                        obj_coll_cur["depth"]=info.url_depth;
+
+                        obj_coll_cur={};
+                        obj_coll_cur.link=list.data[i];
+                        obj_coll_cur.depth=info.url_depth;
                         os_mp.push(obj_coll_cur);
                     };
                 };
             }
 
-            var db='';
-            for(var i=0;i<os_mp.count;i++){
-                db += os_mp[i]['depth'] +' : '+os_mp[i]['link'] +'<br />';
-            }
-            $("#db").html('').html(db);
-            alert(db);
-            
+//            var db='';
+//            for(var i=0;i<os_mp.length;i++){
+//                db += os_mp[i].link + '<br />';
+//            }
+//            $("#db").html('').html(db);
+
+
             _run();
             info.count++;
             return true;
