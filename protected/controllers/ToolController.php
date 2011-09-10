@@ -348,6 +348,11 @@ class ToolController extends Controller
         echo json_encode(array('status'=>true,'msg'=>'http://sitemap.feediy.com/'.$dm.'_'.$time.'.xml'));
     }
 
+    public function actionWp()
+    {
+        
+    }
+
     public function actionTest()
 	{
 //        var_dump(substr('.afas', 0, 1)!='.') ;
@@ -362,8 +367,11 @@ class ToolController extends Controller
 //        $start='/c/';
 //        $r = preg_split($start, $content, 2, PREG_SPLIT_OFFSET_CAPTURE);
 //        pr($r);
-        $url='.sdfs.Html';
-        pr($this->get_suffix($url));
+//        $url='.sdfs.Html';
+//        pr($this->get_suffix($url));
+        $src='http://www.360doc.com/showWeb/0/0/1002.aspx';
+        $o = Tools::OZCurl($src, 10, false);
+        pd($o);
 	}
 	
 
