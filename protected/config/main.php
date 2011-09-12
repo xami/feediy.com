@@ -85,6 +85,9 @@ return array(
                     ),
             ),
         ),
+        'cache'=>array(
+			'class'=>'CFileCache',
+		),
 		'CURL' =>array(
 			'class' => 'application.extensions.Curl',
 		),
