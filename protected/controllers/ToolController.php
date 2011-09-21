@@ -194,7 +194,11 @@ class ToolController extends Controller
             echo json_encode(array('status'=>500,'data'=>''));
             die;
         }
-        $html=iconv($page['Info']['html_code'], 'utf-8//IGNORE', $html);
+
+        if(strtolower($page['Info']['html_code'])!='utf-8'){
+            $html=iconv($page['Info']['html_code'], 'utf-8//IGNORE', $html);
+        }
+
         preg_match_all("'<\s*a\s.*?href\s*=\s*([\"\']?)(?(1)(.*?)\\1|([^\s\>]+))[^>]*>?(.*?)</a>'isx",$html,$links);
 
         if(empty($links)){
@@ -331,7 +335,7 @@ class ToolController extends Controller
                     
                     $xml_body.=
 '<url>'."\r\n".
-'    <loc>'.trim($link).'</loc>'."\r\n".
+'    <loc>'.trim(htmlspecialchars($link)).'</loc>'."\r\n".
 '    <changefreq>hourly</changefreq>'."\r\n".
 '    <priority>'.$priority.'</priority>'."\r\n".
 '</url>'."\r\n";
@@ -345,7 +349,7 @@ class ToolController extends Controller
         $sitemap_file=Yii::app()->basePath.DIRECTORY_SEPARATOR.'sitemap'.DIRECTORY_SEPARATOR.$dm.'_'.$time.'.xml';
         file_put_contents($sitemap_file, $xml_head.$xml_body.$xml_foot);
 
-        echo json_encode(array('status'=>true,'msg'=>'http://sitemap.feediy.com/'.$dm.'_'.$time.'.xml'));
+        echo json_encode(array('status'=>true,'msg'=>'http://sitemap.feediy.com/index.php?download='.$dm.'_'.$time.'.xml'));
     }
 
     public function actionWp()
